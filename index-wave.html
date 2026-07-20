@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Investor Hub — AI-Powered Energy Investment Platform</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296040027829512" crossorigin="anonymous"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',Arial,sans-serif; overflow-x:hidden; }
+
+  /* ── VIDEO BACKGROUND ── */
+  .video-bg {
+    position:fixed; top:0; left:0;
+    width:100%; height:100%;
+    z-index:0; overflow:hidden;
+  }
+  .video-bg video {
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    min-width:100%; min-height:100%;
+    width:auto; height:auto;
+    object-fit:cover;
+  }
+  .video-overlay {
+    position:absolute; top:0; left:0;
+    width:100%; height:100%;
+    background:linear-gradient(
+      180deg,
+      rgba(0,20,60,0.55) 0%,
+      rgba(0,30,80,0.40) 50%,
+      rgba(0,10,40,0.60) 100%
+    );
+  }
+
+  /* ── ALL CONTENT ABOVE VIDEO ── */
+  .content { position:relative; z-index:1; }
+
+  /* ── TICKER ── */
+  .ticker {
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding:10px 0; overflow:hidden; white-space:nowrap;
+  }
+  .ticker-inner {
+    display:inline-block;
+    animation:ticker 25s linear infinite;
+    font-size:13px; color:#e2e8f0;
+  }
+  .ticker-item { display:inline-block; margin:0 28px; }
+  .up { color:#4ade80; font-weight:700; }
+  .down { color:#f87171; font-weight:700; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center; padding:60px 24px 80px;
+    color:#fff;
+  }
+
+  .badge {
+    display:inline-block;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    color:#fff; padding:7px 20px; border-radius:24px;
+    font-size:12px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:28px;
+    animation:fadeInDown 1s ease;
+  }
+
+  .hero h1 {
+    font-size:clamp(36px,7vw,72px);
+    font-weight:900; line-height:1.1; margin-bottom:20px;
+    text-shadow:0 2px 20px rgba(0,0,0,0.5);
+    animation:fadeInDown 1s ease 0.2s both;
+  }
+  .hero h1 span { color:#bbf7d0; }
+
+  .hero p {
+    font-size:clamp(15px,2vw,20px);
+    color:rgba(255,255,255,0.9);
+    max-width:580px; line-height:1.7; margin-bottom:40px;
+    text-shadow:0 1px 8px rgba(0,0,0,0.4);
+    animation:fadeInDown 1s ease 0.4s both;
+  }
+
+  .hero-buttons {
+    display:flex; gap:14px; flex-wrap:wrap;
+    justify-content:center; margin-bottom:50px;
+    animation:fadeInDown 1s ease 0.6s both;
+  }
+
+  .btn-primary {
+    background:rgba(255,255,255,0.95);
+    color:#0057a8; padding:15px 34px; border-radius:8px;
+    font-size:15px; font-weight:800; text-decoration:none;
+    transition:all 0.2s; box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+
+  .btn-secondary {
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    color:#fff; padding:15px 34px; border-radius:8px;
+    font-size:15px; font-weight:700; text-decoration:none;
+    border:1px solid rgba(255,255,255,0.4); transition:all 0.2s;
+  }
+  .btn-secondary:hover { background:rgba(255,255,255,0.25); }
+
+  /* ── GLASS STATS ── */
+  .stats {
+    display:flex; flex-wrap:wrap; justify-content:center;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:16px; overflow:hidden;
+    animation:fadeInUp 1s ease 0.8s both;
+  }
+  .stat {
+    padding:20px 32px; text-align:center;
+    border-right:1px solid rgba(255,255,255,0.15);
+  }
+  .stat:last-child { border-right:none; }
+  .stat-value { font-size:26px; font-weight:900; color:#bbf7d0; }
+  .stat-label { font-size:10px; color:rgba(255,255,255,0.7); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+  /* ── FEATURES (clean white section) ── */
+  .features {
+    background:#ffffff;
+    padding:80px 24px; color:#0f172a;
+  }
+  .section-title { text-align:center; font-size:clamp(24px,4vw,36px); font-weight:800; color:#0f172a; margin-bottom:10px; }
+  .section-sub { text-align:center; color:#64748b; font-size:15px; margin-bottom:48px; }
+  .features-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px; max-width:1100px; margin:0 auto;
+  }
+  .feature-card {
+    background:#f8fafc; border:1px solid #e2e8f0;
+    border-radius:12px; padding:26px 22px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,87,168,0.12); }
+  .feature-icon { font-size:34px; margin-bottom:12px; }
+  .feature-title { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:8px; }
+  .feature-desc { font-size:13px; color:#64748b; line-height:1.65; }
+
+  /* ── SOURCES (clean white) ── */
+  .sources {
+    background:#f8fafc;
+    border-top:1px solid #e2e8f0;
+    padding:48px 24px; text-align:center;
+  }
+  .sources h3 { font-size:13px; color:#94a3b8; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; }
+  .source-logos {
+    display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
+  }
+  .source-badge {
+    background:#fff; border:1px solid #e2e8f0;
+    border-radius:8px; padding:8px 18px;
+    font-size:13px; font-weight:700; color:#374151;
+    box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  /* ── CTA (video background again) ── */
+  .cta {
+    position:relative; overflow:hidden;
+    padding:80px 24px; text-align:center; color:#fff;
+    background:linear-gradient(135deg,#0057a8,#0a6640);
+  }
+  .cta h2 { font-size:clamp(22px,4vw,36px); font-weight:800; margin-bottom:12px; }
+  .cta p { font-size:16px; opacity:.85; margin-bottom:32px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:#0f172a;
+    padding:24px 20px; text-align:center;
+    color:rgba(255,255,255,0.4); font-size:12px;
+    border-top:1px solid rgba(255,255,255,0.05);
+  }
+
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- LIVE VIDEO BACKGROUND -->
+<div class="video-bg">
+  <video autoplay loop muted playsinline>
+    <source src="https://raw.githubusercontent.com/abiyk7/energy-investor-hub-/main/waves.mp4" type="video/mp4">
+    <!-- Fallback free ocean video from Pixabay (no attribution required) -->
+    <source src="https://cdn.pixabay.com/video/2019/09/08/26953-359890791_large.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<div class="content">
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">⚡ NEE $89.40 <span class="up">▲2.1%</span></span>
+      <span class="ticker-item">🔋 GRID $58.20 <span class="up">▲3.4%</span></span>
+      <span class="ticker-item">☢️ NLR $76.80 <span class="up">▲1.8%</span></span>
+      <span class="ticker-item">🌱 ICLN $18.40 <span class="up">▲2.6%</span></span>
+      <span class="ticker-item">⛽ LNG $198.20 <span class="up">▲0.8%</span></span>
+      <span class="ticker-item">☀️ FSLR $204.30 <span class="up">▲1.9%</span></span>
+      <span class="ticker-item">🏭 GEV $341.50 <span class="up">▲3.4%</span></span>
+      <span class="ticker-item">🛢️ CVX $154.70 <span class="down">▼0.3%</span></span>
+      <span class="ticker-item">⚡ NEE $89.40 <span class="up">▲2.1%</span></span>
+      <span class="ticker-item">🔋 GRID $58.20 <span class="up">▲3.4%</span></span>
+      <span class="ticker-item">☢️ NLR $76.80 <span class="up">▲1.8%</span></span>
+      <span class="ticker-item">🌱 ICLN $18.40 <span class="up">▲2.6%</span></span>
+      <span class="ticker-item">⛽ LNG $198.20 <span class="up">▲0.8%</span></span>
+      <span class="ticker-item">☀️ FSLR $204.30 <span class="up">▲1.9%</span></span>
+      <span class="ticker-item">🏭 GEV $341.50 <span class="up">▲3.4%</span></span>
+      <span class="ticker-item">🛢️ CVX $154.70 <span class="down">▼0.3%</span></span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">⚡ Live AI-Powered Energy Intelligence</div>
+    <h1>Invest Smarter in<br><span>Global Energy</span></h1>
+    <p>The world's most comprehensive free platform for energy investors. AI insights, live sector ratings, portfolio builder and weekly briefings.</p>
+    <div class="hero-buttons">
+      <a href="https://energy-investor-bolt-64jp.bolt.host" class="btn-primary">🚀 Open Platform</a>
+      <a href="https://energy-investor-bolt-64jp.bolt.host" class="btn-secondary">📊 View Dashboard</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">$3.4T</div><div class="stat-label">Global Energy Investment</div></div>
+      <div class="stat"><div class="stat-value">10</div><div class="stat-label">Analysis Tabs</div></div>
+      <div class="stat"><div class="stat-value">8</div><div class="stat-label">Sector Ratings</div></div>
+      <div class="stat"><div class="stat-value">Live</div><div class="stat-label">AI Briefings</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES (clean white) -->
+  <section class="features">
+    <h2 class="section-title">Everything an Energy Investor Needs</h2>
+    <p class="section-sub">Built from BlackRock, Morningstar, IEA, Wood Mackenzie and BloombergNEF data</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🏗️</div><div class="feature-title">Portfolio Builder</div><div class="feature-desc">Build and simulate your energy portfolio across 10 assets with AI-powered analysis, compound growth projections and dividend yields.</div></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><div class="feature-title">AI + Energy Tracker</div><div class="feature-desc">Track every hyperscaler energy deal — Microsoft, Google, Amazon, Meta. Live AI demand timeline from 2023 to 2030.</div></div>
+      <div class="feature-card"><div class="feature-icon">📬</div><div class="feature-title">Weekly Briefing</div><div class="feature-desc">Every Monday — AI-written newsletter with the week's top energy investment story, sector moves and one action to take.</div></div>
+      <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Sector Ratings</div><div class="feature-desc">8 energy sectors rated Strong Buy to Speculative. Solar, Nuclear, Grid Infrastructure, LNG, Hydrogen, Battery Storage and more.</div></div>
+      <div class="feature-card"><div class="feature-icon">💡</div><div class="feature-title">Expert Insights</div><div class="feature-desc">Curated from BlackRock, PwC, Wood Mackenzie, Deloitte and IEA — summarised clearly for both beginner and advanced investors.</div></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Trading & ETFs</div><div class="feature-desc">Top energy stocks and ETFs with 2026 YTD performance, analyst ratings and a step-by-step stock screening guide.</div></div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="sources">
+    <h3>Data Sources We Track</h3>
+    <div class="source-logos">
+      <div class="source-badge">BlackRock</div>
+      <div class="source-badge">Morningstar</div>
+      <div class="source-badge">IEA</div>
+      <div class="source-badge">Wood Mackenzie</div>
+      <div class="source-badge">Deloitte</div>
+      <div class="source-badge">BloombergNEF</div>
+      <div class="source-badge">PwC</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Start Investing Smarter Today</h2>
+    <p>Free forever. No signup required. Powered by live AI and real analyst data.</p>
+    <a href="https://energy-investor-bolt-64jp.bolt.host" class="btn-primary">⚡ Open Energy Investor Hub →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Energy Investor Hub · energyinvestorhub.com · Educational platform · Not financial advice</p>
+    <p style="margin-top:5px">Sources: IEA · BlackRock · Morningstar · Wood Mackenzie · Deloitte · PwC · BloombergNEF</p>
+  </footer>
+
+</div>
+</body>
+</html>
