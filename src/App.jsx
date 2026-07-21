@@ -881,13 +881,13 @@ export default function EnergyInvestorHub() {
       <div style={{position:"relative",background:"#ffffff",borderBottom:"1px solid #e2e8f0",padding:"24px 28px 0",overflow:"hidden"}}>
         {/* Video wave background */}
         <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,overflow:"hidden",pointerEvents:"none"}}>
-          <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.18}}>
+          <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.35}}>
             <source src="/waves.mp4" type="video/mp4" />
           </video>
-          <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.85) 100%)"}}></div>
+          <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(255,255,255,0.35)"}}></div>
         </div>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1}}>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24,background:"rgba(255,255,255,0.45)",backdropFilter:"blur(10px)",WebkitBackdropFilter:"blur(10px)",borderRadius:12,padding:"16px 20px",border:"1px solid rgba(255,255,255,0.5)"}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
               <div style={{width:42,height:42,background:"#0057a8",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>⚡</div>
               <div>
@@ -904,9 +904,9 @@ export default function EnergyInvestorHub() {
           </div>
 
           {/* Stats Bar */}
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:1,background:"#e2e8f0",border:"1px solid #e2e8f0",borderRadius:8,overflow:"hidden"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:1,background:"rgba(226,232,240,0.5)",border:"1px solid rgba(226,232,240,0.6)",borderRadius:8,overflow:"hidden",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}>
             {KEY_STATS.map((s,i)=>(
-              <div key={s.label} style={{background:"#fff",padding:"14px 18px",borderRight:i<KEY_STATS.length-1?"1px solid #e2e8f0":"none"}}>
+              <div key={s.label} style={{background:"rgba(255,255,255,0.55)",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)",padding:"14px 18px",borderRight:i<KEY_STATS.length-1?"1px solid rgba(226,232,240,0.6)":"none"}}>
                 <div style={{fontSize:10,color:"#94a3b8",fontWeight:600,letterSpacing:.5,textTransform:"uppercase",marginBottom:3}}>{s.label}</div>
                 <div style={{fontSize:22,fontWeight:800,color:s.accent,lineHeight:1.1}}>{s.value}</div>
                 <div style={{fontSize:11,color:"#64748b",marginTop:3}}>{s.sub}</div>
