@@ -866,7 +866,13 @@ export default function EnergyInvestorHub() {
   };
 
   return (
-    <div style={{minHeight:"100vh",background:"#f8fafc",color:"#111827",fontFamily:"'Inter','Segoe UI',Arial,sans-serif"}}>
+    <div style={{minHeight:"100vh",background:"transparent",color:"#111827",fontFamily:"'Inter','Segoe UI',Arial,sans-serif",position:"relative"}}>
+      {/* Fixed full-page video background */}
+      <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:-1,overflow:"hidden"}}>
+        <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover"}}>
+          <source src="/waves.mp4" type="video/mp4" />
+        </video>
+      </div>
       {/* Top Bar */}
       <div style={{background:"#0f172a",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:44}}>
         <div style={{display:"flex",alignItems:"center",gap:16}}>
@@ -878,14 +884,9 @@ export default function EnergyInvestorHub() {
       </div>
 
       {/* Header */}
-      <div style={{position:"relative",background:"#ffffff",borderBottom:"1px solid #e2e8f0",padding:"24px 28px 0",overflow:"hidden"}}>
-        {/* Video wave background */}
-        <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,overflow:"hidden",pointerEvents:"none"}}>
-          <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.35}}>
-            <source src="/waves.mp4" type="video/mp4" />
-          </video>
-          <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(255,255,255,0.35)"}}></div>
-        </div>
+      <div style={{position:"relative",background:"transparent",borderBottom:"1px solid rgba(226,232,240,0.4)",padding:"24px 28px 0",overflow:"hidden"}}>
+        {/* Glass overlay so header text stays legible over the page-wide video */}
+        <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(255,255,255,0.25)",pointerEvents:"none"}}></div>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24,background:"rgba(255,255,255,0.45)",backdropFilter:"blur(10px)",WebkitBackdropFilter:"blur(10px)",borderRadius:12,padding:"16px 20px",border:"1px solid rgba(255,255,255,0.5)"}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
