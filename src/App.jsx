@@ -879,15 +879,12 @@ export default function EnergyInvestorHub() {
 
       {/* Header */}
       <div style={{position:"relative",background:"#ffffff",borderBottom:"1px solid #e2e8f0",padding:"24px 28px 0",overflow:"hidden"}}>
-        {/* Animated wave background */}
-        <div style={{position:"absolute",top:0,left:0,right:0,height:"100%",overflow:"hidden",pointerEvents:"none",opacity:0.5}}>
-          <svg viewBox="0 0 1440 200" preserveAspectRatio="none" style={{position:"absolute",bottom:0,left:0,width:"200%",height:"100%",animation:"waveMove 18s linear infinite"}}>
-            <path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,220 L0,220 Z" fill="#dbeafe" />
-          </svg>
-          <svg viewBox="0 0 1440 200" preserveAspectRatio="none" style={{position:"absolute",bottom:0,left:0,width:"200%",height:"100%",animation:"waveMove 26s linear infinite reverse"}}>
-            <path d="M0,120 C240,70 480,170 720,120 C960,70 1200,170 1440,120 L1440,220 L0,220 Z" fill="#bfdbfe" opacity="0.7" />
-          </svg>
-          <style>{`@keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
+        {/* Video wave background */}
+        <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,overflow:"hidden",pointerEvents:"none"}}>
+          <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.18}}>
+            <source src="/waves.mp4" type="video/mp4" />
+          </video>
+          <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.85) 100%)"}}></div>
         </div>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24}}>
