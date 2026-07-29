@@ -74,17 +74,6 @@ const TOP_STOCKS = [
   { ticker: "BEP", name: "Brookfield Renewable", sector: "Renewables Infra", price: "$28.90", change: "+1.2%", up: true, note: "Global clean power portfolio" },
 ];
 
-const REVENUE_STREAMS = [
-  { icon: "💰", title: "Broker Affiliate Commissions", tier: "Primary", color: "#0057a8", potential: "$50–$400 per signup", desc: "Partner with eToro, Robinhood, M1 Finance, or Interactive Brokers. When your readers click your affiliate link and open a trading account, you earn a commission. eToro pays $400 CPA or 25% revenue share.", action: "Join eToro Partners, Robinhood Affiliates, or M1 Finance via Impact.com" },
-  { icon: "📰", title: "Newsletter Sponsorships", tier: "Primary", color: "#0a6640", potential: "$50–$150 CPM", desc: "Finance brands pay premium CPMs of $50–$150+ to reach financially-engaged audiences. Even a 5,000-subscriber newsletter can earn $500–$1,500 per edition from a single sponsor.", action: "List on SponsorGap.com or pitch directly to energy ETF providers" },
-  { icon: "🎓", title: "Premium Paid Subscription", tier: "Primary", color: "#7c3aed", potential: "$9–$29/month per subscriber", desc: "Offer a free tier (general news) and a premium tier (deep sector analysis, stock watchlists, weekly AI briefing). Even 500 subscribers at $15/month = $7,500/month recurring revenue.", action: "Use Beehiiv or Substack to launch a paid newsletter tier" },
-  { icon: "📊", title: "Display Advertising (Google AdSense)", tier: "Secondary", color: "#d97706", potential: "$15–$40 RPM", desc: "Finance content earns among the highest ad rates of any niche — $15–$40 per 1,000 page views. With 10,000 monthly visitors, that's $150–$400/month passively from ads alone.", action: "Apply to Google AdSense or Mediavine (higher RPM, requires 50k sessions/month)" },
-  { icon: "🤝", title: "Sponsored Content & Brand Deals", tier: "Secondary", color: "#be185d", potential: "$500–$5,000 per post", desc: "Energy companies, ETF providers, and clean-tech startups will pay to be featured in educational articles. A 'Sponsored Guide to Solar ETFs' can earn $1,000–$5,000 as your audience grows.", action: "Create a 'Partner with us' page listing audience demographics and traffic data" },
-  { icon: "📚", title: "Online Course / Webinar", tier: "Growth", color: "#b45309", potential: "$97–$497 per course", desc: "Package your energy investment knowledge into a beginner's course. Sell via Teachable or Gumroad. One launch to 1,000 visitors at 2% conversion = $2,000–$10,000.", action: "Launch on Teachable, Gumroad, or as a live Zoom webinar series" },
-  { icon: "🔗", title: "Data & Research Affiliate Links", tier: "Growth", color: "#0369a1", potential: "$6–$50 per signup", desc: "Link to premium tools your readers will actually use: Morningstar Premium, Seeking Alpha, or Koyfin. Earn commissions when readers sign up through your links.", action: "Join Morningstar, Seeking Alpha, and Wall Street Journal affiliate programs" },
-  { icon: "🌐", title: "B2B Lead Generation", tier: "Advanced", color: "#065f46", potential: "$50–$300 per lead", desc: "As your site grows, energy companies and financial advisors will pay to reach your engaged investor audience. A simple 'Get a free energy portfolio review' lead form can generate high-value B2B commissions.", action: "Partner with registered investment advisors (RIAs) who serve energy investors" },
-];
-
 // ─── PORTFOLIO BUILDER DATA ───────────────────────────────────────────────────
 
 const PORTFOLIO_ASSETS = [
@@ -856,7 +845,6 @@ export default function EnergyInvestorHub() {
     {id:"sectors",label:"Sector Ratings"},
     {id:"insights",label:"Expert Insights"},
     {id:"ask",label:"Ask AI Analyst"},
-    {id:"benefits",label:"Your Benefits"},
     {id:"glossary",label:"Glossary"},
   ];
 
@@ -1149,50 +1137,6 @@ export default function EnergyInvestorHub() {
         )}
 
         {/* BENEFITS */}
-        {tab==="benefits"&&(
-          <div style={{display:"flex",flexDirection:"column",gap:24}}>
-            <div style={{background:"linear-gradient(135deg,#0057a8,#0a6640)",borderRadius:12,padding:"28px 32px",color:"#fff"}}>
-              <div style={{fontSize:11,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",opacity:.8,marginBottom:8}}>Website Monetization Analysis</div>
-              <h2 style={{margin:"0 0 8px",fontSize:22,fontWeight:800}}>Your Revenue Potential as Owner</h2>
-              <p style={{margin:0,fontSize:14,opacity:.9,lineHeight:1.7}}>An energy investment education website sits in one of the highest-earning niches online. Finance content commands premium ad rates, high affiliate commissions, and engaged audiences willing to pay for subscriptions.</p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:16,marginTop:24}}>
-                {[["$400","Max per broker signup"],["$150 CPM","Newsletter sponsor rate"],["$29/mo","Premium subscriber value"],["$40 RPM","Finance ad revenue rate"]].map(([val,label])=>(
-                  <div key={label} style={{background:"rgba(255,255,255,.15)",borderRadius:8,padding:"12px 16px"}}>
-                    <div style={{fontSize:22,fontWeight:800}}>{val}</div>
-                    <div style={{fontSize:11,opacity:.85,marginTop:3}}>{label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div style={{fontSize:12,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:1,margin:"0 0 16px"}}>Revenue Streams — Ranked by Potential</div>
-              <div style={{display:"flex",flexDirection:"column",gap:14}}>
-                {REVENUE_STREAMS.map(r=>(
-                  <div key={r.title} style={{background:"#fff",border:"1px solid #e2e8f0",borderLeft:`4px solid ${r.color}`,borderRadius:8,padding:"20px 22px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10,marginBottom:10}}>
-                      <div style={{display:"flex",alignItems:"center",gap:10}}>
-                        <span style={{fontSize:22}}>{r.icon}</span>
-                        <div>
-                          <div style={{fontWeight:700,fontSize:15,color:"#111827"}}>{r.title}</div>
-                          <Badge label={r.tier} color={r.tier==="Primary"?"#1e40af":r.tier==="Secondary"?"#92400e":"#374151"} bg={r.tier==="Primary"?"#dbeafe":r.tier==="Secondary"?"#fef3c7":"#f3f4f6"} border="transparent"/>
-                        </div>
-                      </div>
-                      <div style={{textAlign:"right"}}>
-                        <div style={{fontWeight:800,fontSize:16,color:r.color}}>{r.potential}</div>
-                        <div style={{fontSize:10,color:"#94a3b8",marginTop:2}}>Estimated earning</div>
-                      </div>
-                    </div>
-                    <p style={{margin:"0 0 12px",fontSize:13,color:"#4b5563",lineHeight:1.7}}>{r.desc}</p>
-                    <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:6,padding:"8px 12px",fontSize:12,color:"#374151"}}>
-                      <span style={{fontWeight:700,color:"#0057a8"}}>→ Action: </span>{r.action}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* GLOSSARY */}
         {tab==="glossary"&&(
           <div>
