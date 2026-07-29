@@ -823,6 +823,7 @@ function NewsletterHub() {
 
 export default function EnergyInvestorHub() {
   const [tab, setTab] = useState("dashboard");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [aiInsight, setAiInsight] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [aiQuestion, setAiQuestion] = useState("");
@@ -867,15 +868,45 @@ export default function EnergyInvestorHub() {
 
   return (
     <div style={{minHeight:"100vh",background:"transparent",color:"#111827",fontFamily:"'Inter','Segoe UI',Arial,sans-serif",position:"relative"}}>
-      {/* Fixed full-page video background */}
-      <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:-1,overflow:"hidden"}}>
-        <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover"}}>
-          <source src="/waves.mp4" type="video/mp4" />
-        </video>
+      {/* Hamburger navigation drawer */}
+      {menuOpen&&(
+        <div onClick={()=>setMenuOpen(false)} style={{position:"fixed",inset:0,background:"rgba(15,23,42,0.5)",zIndex:100,display:"flex"}}>
+          <div onClick={e=>e.stopPropagation()} style={{width:280,maxWidth:"80vw",background:"#fff",height:"100%",boxShadow:"2px 0 20px rgba(0,0,0,.2)",padding:"20px 0",overflowY:"auto",animation:"slideIn .25s ease-out"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"0 20px 16px",borderBottom:"1px solid #f1f5f9",marginBottom:8}}>
+              <span style={{fontWeight:800,fontSize:14,color:"#0f172a"}}>⚡ Energy Investor Hub</span>
+              <button onClick={()=>setMenuOpen(false)} aria-label="Close menu" style={{background:"none",border:"none",fontSize:20,color:"#64748b",cursor:"pointer",padding:4}}>✕</button>
+            </div>
+            {TABS.map(t=>(
+              <button key={t.id} onClick={()=>{setTab(t.id);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:tab===t.id?"#eff6ff":"none",border:"none",borderLeft:tab===t.id?"3px solid #0057a8":"3px solid transparent",padding:"12px 20px",fontSize:14,fontWeight:tab===t.id?700:500,color:tab===t.id?"#0057a8":"#374151",cursor:"pointer"}}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <style>{`@keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}`}</style>
+        </div>
+      )}
+      {/* Professional animated background — soft gradient blobs + subtle grid, no video needed */}
+      <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:-1,overflow:"hidden",background:"#f8fafc"}}>
+        {/* Faint grid texture for a "data platform" feel */}
+        <div style={{position:"absolute",inset:0,backgroundImage:"linear-gradient(rgba(15,23,42,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.035) 1px, transparent 1px)",backgroundSize:"48px 48px"}}></div>
+        {/* Slow-drifting soft color blobs in brand colors */}
+        <div style={{position:"absolute",top:"-10%",left:"-10%",width:520,height:520,borderRadius:"50%",background:"radial-gradient(circle, rgba(0,87,168,0.10) 0%, rgba(0,87,168,0) 70%)",animation:"driftA 22s ease-in-out infinite"}}></div>
+        <div style={{position:"absolute",top:"30%",right:"-12%",width:600,height:600,borderRadius:"50%",background:"radial-gradient(circle, rgba(124,58,237,0.09) 0%, rgba(124,58,237,0) 70%)",animation:"driftB 28s ease-in-out infinite"}}></div>
+        <div style={{position:"absolute",bottom:"-15%",left:"20%",width:560,height:560,borderRadius:"50%",background:"radial-gradient(circle, rgba(10,102,64,0.08) 0%, rgba(10,102,64,0) 70%)",animation:"driftC 25s ease-in-out infinite"}}></div>
+        <style>{`
+          @keyframes driftA{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+          @keyframes driftB{0%,100%{transform:translate(0,0)}50%{transform:translate(-35px,25px)}}
+          @keyframes driftC{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
+        `}</style>
       </div>
       {/* Top Bar */}
       <div style={{background:"#0f172a",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:44}}>
         <div style={{display:"flex",alignItems:"center",gap:16}}>
+          <button onClick={()=>setMenuOpen(true)} aria-label="Open menu" style={{background:"none",border:"none",cursor:"pointer",padding:6,display:"flex",flexDirection:"column",gap:4,marginLeft:-6}}>
+            <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
+            <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
+            <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
+          </button>
           <span style={{color:"#f1f5f9",fontSize:11,fontWeight:700,letterSpacing:1}}>ENERGY INVESTOR HUB</span>
           <span style={{color:"#475569",fontSize:11}}>|</span>
           <span style={{color:"#94a3b8",fontSize:11}}>Educational Platform · Not Financial Advice</span>
@@ -885,7 +916,7 @@ export default function EnergyInvestorHub() {
 
       {/* Header */}
       <div style={{position:"relative",background:"transparent",borderBottom:"1px solid rgba(226,232,240,0.4)",padding:"24px 28px 0",overflow:"hidden"}}>
-        {/* Glass overlay so header text stays legible over the page-wide video */}
+        {/* Soft glass overlay so header text stays legible over the animated background */}
         <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(255,255,255,0.25)",pointerEvents:"none"}}></div>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24,background:"rgba(255,255,255,0.45)",backdropFilter:"blur(10px)",WebkitBackdropFilter:"blur(10px)",borderRadius:12,padding:"16px 20px",border:"1px solid rgba(255,255,255,0.5)"}}>
@@ -893,7 +924,12 @@ export default function EnergyInvestorHub() {
               <div style={{width:42,height:42,background:"#0057a8",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>⚡</div>
               <div>
                 <h1 style={{margin:0,fontSize:24,fontWeight:800,color:"#0f172a",letterSpacing:-.5}}>Energy Investor Hub</h1>
-                <p style={{margin:"4px 0 0",fontSize:12,color:"#64748b"}}>Global Energy Intelligence · Portfolio Builder · AI Tracker · Weekly Briefing</p>
+                <div style={{marginTop:6,display:"flex",flexDirection:"column",gap:2}}>
+                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .1s forwards"}}>Global Energy Intelligence</span>
+                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .35s forwards"}}>Portfolio Builder · AI Tracker</span>
+                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .6s forwards"}}>Weekly Briefing</span>
+                </div>
+                <style>{`@keyframes layerIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
               </div>
             </div>
             <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:5}}>
