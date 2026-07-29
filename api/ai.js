@@ -14,8 +14,22 @@
 // Change this to your real domain(s) once you know them for certain.
 const ALLOWED_ORIGINS = [
   "https://www.energyinvestorhub.com",
+  "https://energyinvestorhub.com",
   "https://energy-investor-hub.vercel.app",
 ];
+
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  // Also allow any Vercel preview deployment URL for this project
+  // (these look like https://energy-investor-xxxxxxxx-yourteam.vercel.app)
+  try {
+    const host = new URL(origin).hostname;
+    return host.endsWith(".vercel.app") && host.includes("energy-investor");
+  } catch {
+    return false;
+  }
+}
 
 // In-memory rate limit store (resets on cold start — good enough as a first line of defense)
 const requestLog = new Map(); // ip -> array of timestamps
@@ -40,7 +54,7 @@ export default async function handler(req, res) {
   // (Requests without an Origin header, e.g. from curl/Postman, are also blocked here;
   // this is intentional since normal browser usage always sends one.)
   const origin = req.headers.origin;
-  if (!origin || !ALLOWED_ORIGINS.includes(origin)) {
+  if (!isAllowedOrigin(origin)) {
     return res.status(403).json({ error: "Forbidden" });
   }
 
