@@ -646,31 +646,17 @@ function AIEnergyTracker() {
 // ─── FEATURE 3: WEEKLY NEWSLETTER ────────────────────────────────────────────
 
 function NewsletterHub() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [interest, setInterest] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
   const [previewLoading, setPreviewLoading] = useState(false);
   const [previewContent, setPreviewContent] = useState("");
   const [previewGenerated, setPreviewGenerated] = useState(false);
-  const [subCount] = useState(1247);
 
-  const interests = ["Solar & Wind","Nuclear","Grid Infrastructure","LNG & Gas","Battery Storage","Hydrogen","ETFs & Funds","M&A Deals"];
-
-  const toggleInterest = (item) => {
-    setInterest(prev=>prev.includes(item)?prev.filter(i=>i!==item):[...prev,item]);
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault&&e.preventDefault();
-    if(!email||!email.includes("@")) return;
-    setSubmitted(true);
-  };
+  // Real subscribe page — every signup here goes into an actual Beehiiv list.
+  const SUBSCRIBE_URL = "https://energyinvestorhub.beehiiv.com/subscribe";
 
   const generatePreview = async () => {
     setPreviewLoading(true);
     setPreviewContent("");
-    const prompt = `You are the editor of the Energy Investor Hub Monday Briefing newsletter. Write this week's edition (week of June 30, 2026) in a professional but accessible tone. Search the web for the latest energy investment news. Structure it as: 1) ONE BIG THING (1 paragraph on the week's most important energy investment development), 2) SECTOR WATCH (2-3 bullet points on key sector moves), 3) DEAL OF THE WEEK (1 notable M&A or PPA deal), 4) CHART TO WATCH (describe one key data trend investors should monitor), 5) READER TIP (one practical action investors can take this week). Use current real data. Be specific with company names, numbers, and percentages.`;
+    const prompt = `You are the editor of the Energy Investor Hub Monday Briefing newsletter. Write this week's edition in a professional but accessible tone. Search the web for the latest energy investment news. Structure it as: 1) ONE BIG THING (1 paragraph on the week's most important energy investment development), 2) SECTOR WATCH (2-3 bullet points on key sector moves), 3) DEAL OF THE WEEK (1 notable M&A or PPA deal), 4) CHART TO WATCH (describe one key data trend investors should monitor), 5) READER TIP (one practical action investors can take this week). Use current real data. Be specific with company names, numbers, and percentages.`;
     const text = await askAI(prompt, 1200);
     setPreviewContent(text);
     setPreviewGenerated(true);
@@ -696,7 +682,6 @@ function NewsletterHub() {
       <SectionHeader
         sub="Feature 3 of 3 · Builds Your Audience"
         title="Weekly Energy Investor Briefing"
-        right={<div style={{display:"flex",alignItems:"center",gap:8}}><div style={{width:8,height:8,borderRadius:"50%",background:"#22c55e",animation:"ping 2s infinite"}}><style>{`@keyframes ping{0%,100%{opacity:1}50%{opacity:.3}}`}</style></div><span style={{fontSize:13,color:"#64748b",fontWeight:600}}>{subCount.toLocaleString()} subscribers</span></div>}
       />
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,alignItems:"start"}}>
@@ -718,46 +703,19 @@ function NewsletterHub() {
             </div>
           </div>
 
-          {/* Signup form */}
-          {!submitted?(
-            <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-              <div style={{fontSize:14,fontWeight:700,color:"#0f172a",marginBottom:4}}>Subscribe — Free Forever</div>
-              <div style={{fontSize:12,color:"#94a3b8",marginBottom:16}}>Join {subCount.toLocaleString()} energy investors. No spam, ever.</div>
-              <div style={{display:"flex",flexDirection:"column",gap:10}}>
-                <input value={name} onChange={e=>setName(e.target.value)} placeholder="Your first name" style={{border:"1px solid #cbd5e1",borderRadius:7,padding:"10px 14px",fontSize:13,color:"#111827",outline:"none"}}/>
-                <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email address" type="email" style={{border:"1px solid #cbd5e1",borderRadius:7,padding:"10px 14px",fontSize:13,color:"#111827",outline:"none"}}/>
-                <div style={{fontSize:12,color:"#64748b",fontWeight:600,marginTop:4}}>Topics you care about:</div>
-                <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-                  {interests.map(item=>(
-                    <button key={item} onClick={()=>toggleInterest(item)} style={{background:interest.includes(item)?"#0057a8":"#f8fafc",color:interest.includes(item)?"#fff":"#374151",border:"1px solid",borderColor:interest.includes(item)?"#0057a8":"#e2e8f0",borderRadius:20,padding:"5px 12px",fontSize:12,cursor:"pointer",fontWeight:500,transition:"all .15s"}}>{item}</button>
-                  ))}
-                </div>
-                <button onClick={handleSubscribe} disabled={!email||!email.includes("@")} style={{background:!email||!email.includes("@")?"#e2e8f0":"#0057a8",color:!email||!email.includes("@")?"#94a3b8":"#fff",border:"none",borderRadius:7,padding:"12px",fontSize:14,fontWeight:700,cursor:!email||!email.includes("@")?"default":"pointer",marginTop:4}}>
-                  Subscribe Free →
-                </button>
-              </div>
+          {/* Real signup — links out to the actual Beehiiv subscribe page */}
+          <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#0f172a",marginBottom:4}}>Subscribe — Free Forever</div>
+            <div style={{fontSize:12,color:"#94a3b8",marginBottom:16}}>No spam, ever. Unsubscribe anytime.</div>
+            <div style={{fontSize:12,color:"#64748b",fontWeight:600,marginBottom:8}}>Topics we cover:</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:16}}>
+              {["Solar & Wind","Nuclear","Grid Infrastructure","LNG & Gas","Battery Storage","Hydrogen","ETFs & Funds","M&A Deals"].map(item=>(
+                <span key={item} style={{background:"#f8fafc",color:"#374151",border:"1px solid #e2e8f0",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:500}}>{item}</span>
+              ))}
             </div>
-          ):(
-            <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:10,padding:"24px",textAlign:"center"}}>
-              <div style={{fontSize:32,marginBottom:8}}>🎉</div>
-              <div style={{fontWeight:800,fontSize:16,color:"#065f46",marginBottom:6}}>You're subscribed{name?`, ${name}`:""}!</div>
-              <div style={{fontSize:13,color:"#166534",lineHeight:1.6}}>Your first Monday Briefing arrives this coming Monday. Check your inbox and whitelist <strong>hello@energyinvestorhub.com</strong> to ensure delivery.</div>
-              <div style={{marginTop:16,fontSize:12,color:"#94a3b8"}}>While you wait — preview this week's edition below ↓</div>
-            </div>
-          )}
-
-          {/* Social proof */}
-          <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"16px 20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:12}}>What subscribers say</div>
-            {[
-              {quote:"The only newsletter that actually explains the AI-energy connection simply. I forward it every Monday.",name:"Marcus T.",role:"Retail Investor"},
-              {quote:"Finally a place for beginners that doesn't talk down to you. The sector ratings are invaluable.",name:"Sarah K.",role:"Finance Graduate"},
-            ].map(r=>(
-              <div key={r.name} style={{marginBottom:12,paddingBottom:12,borderBottom:"1px solid #f1f5f9"}}>
-                <div style={{fontSize:13,color:"#374151",fontStyle:"italic",lineHeight:1.6,marginBottom:6}}>"{r.quote}"</div>
-                <div style={{fontSize:11,color:"#94a3b8",fontWeight:600}}>{r.name} · {r.role}</div>
-              </div>
-            ))}
+            <a href={SUBSCRIBE_URL} target="_blank" rel="noreferrer" style={{display:"block",textAlign:"center",textDecoration:"none",background:"#0057a8",color:"#fff",border:"none",borderRadius:7,padding:"12px",fontSize:14,fontWeight:700}}>
+              Subscribe Free →
+            </a>
           </div>
         </div>
 
@@ -795,12 +753,6 @@ function NewsletterHub() {
             {!previewLoading&&previewContent&&(
               <div>{formatNewsletter(previewContent)}</div>
             )}
-          </div>
-
-          {/* Sponsor callout */}
-          <div style={{marginTop:14,background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"12px 16px"}}>
-            <div style={{fontSize:11,fontWeight:700,color:"#92400e",textTransform:"uppercase",letterSpacing:.8,marginBottom:4}}>💰 Sponsor Opportunity</div>
-            <div style={{fontSize:12,color:"#78350f",lineHeight:1.55}}>This newsletter reaches <strong>{subCount.toLocaleString()}+ verified energy investors</strong>. Sponsorships from $200/edition. <strong>Contact: sponsors@energyinvestorhub.com</strong></div>
           </div>
         </div>
       </div>
