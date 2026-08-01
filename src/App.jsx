@@ -798,6 +798,7 @@ export default function EnergyInvestorHub() {
     {id:"insights",label:"Expert Insights"},
     {id:"ask",label:"Ask AI Analyst"},
     {id:"glossary",label:"Glossary"},
+    {id:"about",label:"About & Trust"},
   ];
 
   const S={
@@ -1101,6 +1102,64 @@ export default function EnergyInvestorHub() {
                 </div>
               ))}
               {filteredGlossary.length===0&&<div style={{color:"#94a3b8",fontSize:14,padding:"20px 0"}}>No matching terms found.</div>}
+            </div>
+          </div>
+        )}
+
+        {/* ABOUT & TRUST */}
+        {tab==="about"&&(
+          <div style={{display:"flex",flexDirection:"column",gap:20}}>
+            <div style={S.card}>
+              <h3 style={S.sectionTitle}>Who's Behind This Site</h3>
+              <div style={{display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap"}}>
+                <div style={{width:56,height:56,borderRadius:"50%",background:"#0057a8",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,color:"#fff",fontWeight:800,flexShrink:0}}>⚡</div>
+                <div style={{flex:1,minWidth:220}}>
+                  <div style={{fontWeight:700,fontSize:15,color:"#111827",marginBottom:4}}>The Energy Investor Hub Team</div>
+                  <p style={{margin:0,fontSize:13.5,color:"#4b5563",lineHeight:1.7}}>
+                    Energy Investor Hub is an independent educational project tracking the energy transition
+                    and AI-driven power demand — built to make a fast-moving sector easier to follow for
+                    everyday investors. Have a question, spotted an error, or want to get in touch?
+                    Email <strong>info@energyinvestorhub.com</strong>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <h3 style={S.sectionTitle}>What This Site Is — and Isn't</h3>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
+                <div>
+                  <div style={{fontWeight:700,fontSize:13,color:"#065f46",marginBottom:8}}>✓ What we are</div>
+                  {["An educational resource on energy-sector investing","AI-curated summaries of public reports (IEA, BlackRock, Morningstar, etc.)","A free portfolio-simulation tool for learning purposes","A newsletter you can freely subscribe to or leave anytime"].map(t=>(
+                    <div key={t} style={{fontSize:12.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
+                      <span style={{position:"absolute",left:0,color:"#059669"}}>•</span>{t}
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <div style={{fontWeight:700,fontSize:13,color:"#991b1b",marginBottom:8}}>✕ What we are not</div>
+                  {["A broker, bank, or regulated investment firm","A custodian of your money — we never accept deposits","A source of personalized financial advice","Affiliated with any government regulator or agency"].map(t=>(
+                    <div key={t} style={{fontSize:12.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
+                      <span style={{position:"absolute",left:0,color:"#dc2626"}}>•</span>{t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <h3 style={S.sectionTitle}>How We Make Money</h3>
+              <p style={{margin:0,fontSize:13.5,color:"#4b5563",lineHeight:1.7}}>
+                This site is supported by display advertising (Google AdSense) and affiliate partnerships
+                with services like Seeking Alpha and eToro — if you sign up through a link on this site, we
+                may earn a commission at no extra cost to you. This never influences our editorial content
+                or AI-generated summaries.
+              </p>
+            </div>
+
+            <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"14px 18px",fontSize:12.5,color:"#92400e",lineHeight:1.6}}>
+              ⚠️ <strong>Reminder:</strong> Nothing on this site is financial advice. Always do your own
+              research and consult a licensed financial advisor before making investment decisions.
             </div>
           </div>
         )}
