@@ -74,6 +74,54 @@ const TOP_STOCKS = [
   { ticker: "BEP", name: "Brookfield Renewable", sector: "Renewables Infra", price: "$28.90", change: "+1.2%", up: true, note: "Global clean power portfolio" },
 ];
 
+// ─── ARTICLES (Original written content) ──────────────────────────────────────
+
+const ARTICLES = [
+  {
+    id: 1,
+    title: "Why Grid Infrastructure Is Becoming the Most Overlooked Investment in Energy",
+    date: "August 2026",
+    readTime: "4 min read",
+    body: `For years, clean energy investing meant one thing: solar panels and wind turbines. But in 2026, the smartest money is flowing somewhere less glamorous — the grid itself.
+
+Here's the problem nobody saw coming. The United States has plenty of renewable energy projects ready to go. What it doesn't have is enough transmission capacity to actually move that power from where it's generated to where it's needed. Some solar farms in Texas and wind projects in the Midwest are sitting in multi-year "interconnection queues," essentially waiting in line to plug into a grid that wasn't built for this much decentralized power.
+
+This bottleneck has quietly become one of the biggest constraints on the entire energy transition. And for investors, it's created an unusual opportunity: companies that build, upgrade, or manage grid infrastructure are becoming just as important as the power generators themselves.
+
+Take GE Vernova, spun off from General Electric in 2024. Its turbines and grid equipment sit at the center of nearly every major buildout — from utility-scale wind farms to the substations feeding AI data centers. Or look at NextEra Energy, which has spent the last decade building not just renewable capacity, but the transmission lines to support it.
+
+The lesson for investors is simple: don't just look at who's generating clean power. Look at who's moving it. Grid modernization isn't the exciting part of the energy story, but it might be the most durable one — because no matter which generation technology wins in the long run, someone has to build the pipes.`,
+  },
+  {
+    id: 2,
+    title: "What Nobody Tells You About Investing in Nuclear Energy Right Now",
+    date: "August 2026",
+    readTime: "4 min read",
+    body: `Ask most people about nuclear power and you'll get one of two reactions: outdated fear from the 1980s, or genuine confusion about why it's suddenly back in the news.
+
+Here's what changed. AI companies need enormous, reliable amounts of electricity — and they need it running 24 hours a day, every day. Solar and wind are great, but they're intermittent. A data center can't shut down when the sun goes behind a cloud. Nuclear, whatever its reputation, is the only clean energy source that can reliably run around the clock.
+
+That's why in 2023, Microsoft signed a deal to restart the Three Mile Island nuclear plant specifically to power its AI operations. It wasn't a one-off. Since then, Google, Amazon, and Meta have all struck similar deals, either buying power directly from nuclear plants or investing in next-generation reactor technology.
+
+This shift matters for investors because it changes who benefits from a nuclear "comeback." It's not just utility companies running old plants — it's uranium miners like Cameco, who supply the fuel; it's engineering firms working on small modular reactors; and it's the tech companies themselves, some of whom are now effectively becoming power producers.
+
+Nuclear investing isn't for everyone. It's a slower-moving, more regulated corner of the energy market than solar or batteries. But if the AI boom continues anywhere near its current pace, the demand for reliable baseload power isn't going away — and neither is nuclear's role in supplying it.`,
+  },
+  {
+    id: 3,
+    title: "The Quiet Boom in Battery Storage — And Why It's Different From the Hype Cycle",
+    date: "August 2026",
+    readTime: "3 min read",
+    body: `Every few years, some corner of the clean energy world gets hyped beyond reason, only to disappoint. Battery storage has largely avoided that trap — and for investors paying attention, that's exactly why it's interesting.
+
+The basic problem battery storage solves is straightforward: solar panels generate the most power at noon, but people use the most electricity in the evening. Wind can blow strongest at night, when demand is lowest. Without storage, a huge amount of clean energy either goes unused or destabilizes the grid.
+
+What's changed recently is cost. Battery prices have fallen dramatically over the past five years, to the point where large-scale storage projects are now genuinely profitable, not just subsidized experiments. In the US alone, operating battery storage capacity grew by roughly a third in 2025 — a pace that's hard to find anywhere else in the energy sector.
+
+For investors, this creates a fairly unusual profile: battery storage isn't a bet on any particular energy source winning. It's infrastructure that makes every other clean energy source more valuable, by solving the timing mismatch between generation and demand. That's part of why it's attracted interest from both renewable-focused funds and more traditional infrastructure investors — it's not really a bet on the future, it's a fix for a problem that already exists today.`,
+  },
+];
+
 // ─── PORTFOLIO BUILDER DATA ───────────────────────────────────────────────────
 
 const PORTFOLIO_ASSETS = [
@@ -248,6 +296,40 @@ function ETFRow({ e }) {
       <div style={{textAlign:"right"}}>
         <div style={{fontSize:15,fontWeight:800,color:positive?"#059669":"#dc2626"}}>{e.ytd}</div>
         <div style={{fontSize:10,color:"#94a3b8",marginTop:2}}>YTD 2026</div>
+      </div>
+    </div>
+  );
+}
+
+// ─── FEATURE: ARTICLES ────────────────────────────────────────────────────────
+
+function ArticlesHub() {
+  const [openArticle, setOpenArticle] = useState(null);
+
+  if (openArticle) {
+    const a = ARTICLES.find(x => x.id === openArticle);
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:16,maxWidth:760,margin:"0 auto"}}>
+        <button onClick={()=>setOpenArticle(null)} style={{alignSelf:"flex-start",background:"none",border:"none",color:"#0057a8",fontSize:13,fontWeight:600,cursor:"pointer",padding:0}}>← Back to all articles</button>
+        <div style={{fontSize:11,color:"#94a3b8",fontWeight:600}}>{a.date} · {a.readTime}</div>
+        <h1 style={{margin:0,fontSize:26,fontWeight:800,color:"#0f172a",lineHeight:1.3}}>{a.title}</h1>
+        <div style={{fontSize:15,color:"#374151",lineHeight:1.85,whiteSpace:"pre-line"}}>{a.body}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:20}}>
+      <SectionHeader sub="Insights & Analysis" title="Articles"/>
+      <div style={{display:"flex",flexDirection:"column",gap:14}}>
+        {ARTICLES.map(a=>(
+          <button key={a.id} onClick={()=>setOpenArticle(a.id)} style={{textAlign:"left",background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px 22px",cursor:"pointer",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
+            <div style={{fontSize:11,color:"#94a3b8",fontWeight:600,marginBottom:6}}>{a.date} · {a.readTime}</div>
+            <div style={{fontSize:17,fontWeight:700,color:"#0f172a",marginBottom:8,lineHeight:1.35}}>{a.title}</div>
+            <div style={{fontSize:13,color:"#64748b",lineHeight:1.6}}>{a.body.slice(0,140)}...</div>
+            <div style={{marginTop:10,fontSize:12,color:"#0057a8",fontWeight:700}}>Read more →</div>
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -793,6 +875,7 @@ export default function EnergyInvestorHub() {
     {id:"portfolio",label:"🏗 Portfolio Builder"},
     {id:"ai-energy",label:"🤖 AI + Energy Tracker"},
     {id:"newsletter",label:"📬 Newsletter"},
+    {id:"articles",label:"📝 Articles"},
     {id:"trading",label:"Trading & ETFs"},
     {id:"sectors",label:"Sector Ratings"},
     {id:"insights",label:"Expert Insights"},
@@ -987,6 +1070,7 @@ export default function EnergyInvestorHub() {
         {tab==="portfolio"&&<PortfolioBuilder/>}
         {tab==="ai-energy"&&<AIEnergyTracker/>}
         {tab==="newsletter"&&<NewsletterHub/>}
+        {tab==="articles"&&<ArticlesHub/>}
 
         {/* TRADING */}
         {tab==="trading"&&(
