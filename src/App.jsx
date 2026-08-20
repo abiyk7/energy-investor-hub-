@@ -74,54 +74,6 @@ const TOP_STOCKS = [
   { ticker: "BEP", name: "Brookfield Renewable", sector: "Renewables Infra", price: "$28.90", change: "+1.2%", up: true, note: "Global clean power portfolio" },
 ];
 
-// ─── ARTICLES (Original written content) ──────────────────────────────────────
-
-const ARTICLES = [
-  {
-    id: 1,
-    title: "Why Grid Infrastructure Is Becoming the Most Overlooked Investment in Energy",
-    date: "August 2026",
-    readTime: "4 min read",
-    body: `For years, clean energy investing meant one thing: solar panels and wind turbines. But in 2026, the smartest money is flowing somewhere less glamorous — the grid itself.
-
-Here's the problem nobody saw coming. The United States has plenty of renewable energy projects ready to go. What it doesn't have is enough transmission capacity to actually move that power from where it's generated to where it's needed. Some solar farms in Texas and wind projects in the Midwest are sitting in multi-year "interconnection queues," essentially waiting in line to plug into a grid that wasn't built for this much decentralized power.
-
-This bottleneck has quietly become one of the biggest constraints on the entire energy transition. And for investors, it's created an unusual opportunity: companies that build, upgrade, or manage grid infrastructure are becoming just as important as the power generators themselves.
-
-Take GE Vernova, spun off from General Electric in 2024. Its turbines and grid equipment sit at the center of nearly every major buildout — from utility-scale wind farms to the substations feeding AI data centers. Or look at NextEra Energy, which has spent the last decade building not just renewable capacity, but the transmission lines to support it.
-
-The lesson for investors is simple: don't just look at who's generating clean power. Look at who's moving it. Grid modernization isn't the exciting part of the energy story, but it might be the most durable one — because no matter which generation technology wins in the long run, someone has to build the pipes.`,
-  },
-  {
-    id: 2,
-    title: "What Nobody Tells You About Investing in Nuclear Energy Right Now",
-    date: "August 2026",
-    readTime: "4 min read",
-    body: `Ask most people about nuclear power and you'll get one of two reactions: outdated fear from the 1980s, or genuine confusion about why it's suddenly back in the news.
-
-Here's what changed. AI companies need enormous, reliable amounts of electricity — and they need it running 24 hours a day, every day. Solar and wind are great, but they're intermittent. A data center can't shut down when the sun goes behind a cloud. Nuclear, whatever its reputation, is the only clean energy source that can reliably run around the clock.
-
-That's why in 2023, Microsoft signed a deal to restart the Three Mile Island nuclear plant specifically to power its AI operations. It wasn't a one-off. Since then, Google, Amazon, and Meta have all struck similar deals, either buying power directly from nuclear plants or investing in next-generation reactor technology.
-
-This shift matters for investors because it changes who benefits from a nuclear "comeback." It's not just utility companies running old plants — it's uranium miners like Cameco, who supply the fuel; it's engineering firms working on small modular reactors; and it's the tech companies themselves, some of whom are now effectively becoming power producers.
-
-Nuclear investing isn't for everyone. It's a slower-moving, more regulated corner of the energy market than solar or batteries. But if the AI boom continues anywhere near its current pace, the demand for reliable baseload power isn't going away — and neither is nuclear's role in supplying it.`,
-  },
-  {
-    id: 3,
-    title: "The Quiet Boom in Battery Storage — And Why It's Different From the Hype Cycle",
-    date: "August 2026",
-    readTime: "3 min read",
-    body: `Every few years, some corner of the clean energy world gets hyped beyond reason, only to disappoint. Battery storage has largely avoided that trap — and for investors paying attention, that's exactly why it's interesting.
-
-The basic problem battery storage solves is straightforward: solar panels generate the most power at noon, but people use the most electricity in the evening. Wind can blow strongest at night, when demand is lowest. Without storage, a huge amount of clean energy either goes unused or destabilizes the grid.
-
-What's changed recently is cost. Battery prices have fallen dramatically over the past five years, to the point where large-scale storage projects are now genuinely profitable, not just subsidized experiments. In the US alone, operating battery storage capacity grew by roughly a third in 2025 — a pace that's hard to find anywhere else in the energy sector.
-
-For investors, this creates a fairly unusual profile: battery storage isn't a bet on any particular energy source winning. It's infrastructure that makes every other clean energy source more valuable, by solving the timing mismatch between generation and demand. That's part of why it's attracted interest from both renewable-focused funds and more traditional infrastructure investors — it's not really a bet on the future, it's a fix for a problem that already exists today.`,
-  },
-];
-
 // ─── PORTFOLIO BUILDER DATA ───────────────────────────────────────────────────
 
 const PORTFOLIO_ASSETS = [
@@ -170,12 +122,6 @@ const TAG_COLORS = {
 };
 
 // ─── SECURE AI HELPER ────────────────────────────────────────────────────────
-// Every AI feature now calls our own backend endpoint (/api/ai) instead of
-// hitting the Anthropic API directly. The real API key lives only on the
-// server (as a Vercel environment variable), never in this client code.
-// This also lets us centralize error handling, timeouts, and basic misuse
-// protection (e.g. blocking empty/oversized prompts) in one place.
-
 async function askAI(prompt, maxTokens = 1000) {
   try {
     const res = await fetch("/api/ai", {
@@ -207,19 +153,19 @@ function LoadingDots() {
 }
 
 function Badge({ label, color, bg, border }) {
-  return <span style={{background:bg||"#f3f4f6",color:color||"#374151",border:`1px solid ${border||"#e5e7eb"}`,fontSize:10,fontWeight:700,padding:"3px 9px",borderRadius:4,letterSpacing:.8,textTransform:"uppercase"}}>{label}</span>;
+  return <span style={{background:bg||"#f3f4f6",color:color||"#374151",border:`1px solid ${border||"#e5e7eb"}`,fontSize:11,fontWeight:700,padding:"3px 9px",borderRadius:4,letterSpacing:.8,textTransform:"uppercase"}}>{label}</span>;
 }
 
 function Tag({ label }) {
-  return <span style={{background:TAG_COLORS[label]||"#374151",color:"#fff",fontSize:10,fontWeight:700,padding:"3px 9px",borderRadius:4,letterSpacing:.8,textTransform:"uppercase"}}>{label}</span>;
+  return <span style={{background:TAG_COLORS[label]||"#374151",color:"#fff",fontSize:11,fontWeight:700,padding:"3px 9px",borderRadius:4,letterSpacing:.8,textTransform:"uppercase"}}>{label}</span>;
 }
 
 function SectionHeader({ title, sub, right }) {
   return (
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",flexWrap:"wrap",gap:8,marginBottom:20}}>
       <div>
-        <div style={{fontSize:11,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>{sub}</div>
-        <h2 style={{margin:0,fontSize:20,fontWeight:800,color:"#0f172a"}}>{title}</h2>
+        <div style={{fontSize:13,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>{sub}</div>
+        <h2 style={{margin:0,fontSize:23,fontWeight:800,color:"#0f172a"}}>{title}</h2>
       </div>
       {right}
     </div>
@@ -230,11 +176,11 @@ function InsightCard({ insight }) {
   return (
     <div style={{background:"#fff",border:"1px solid #e5e7eb",borderTop:`3px solid ${insight.color}`,borderRadius:8,padding:"20px 22px",display:"flex",flexDirection:"column",gap:10,boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:8}}>
-        <span style={{fontSize:12,color:"#6b7280",fontWeight:600}}>{insight.source} · {insight.date}</span>
+        <span style={{fontSize:14,color:"#6b7280",fontWeight:600}}>{insight.source} · {insight.date}</span>
         <Tag label={insight.tag}/>
       </div>
-      <div style={{fontWeight:700,fontSize:15,color:"#111827",lineHeight:1.45}}>{insight.headline}</div>
-      <div style={{fontSize:13,color:"#4b5563",lineHeight:1.7}}>{insight.summary}</div>
+      <div style={{fontWeight:700,fontSize:17,color:"#111827",lineHeight:1.45}}>{insight.headline}</div>
+      <div style={{fontSize:15,color:"#4b5563",lineHeight:1.7}}>{insight.summary}</div>
     </div>
   );
 }
@@ -248,14 +194,14 @@ function SectorRow({ s }) {
     <div style={{background:"#fff",border:"1px solid #e5e7eb",borderRadius:8,padding:"16px 20px",display:"grid",gridTemplateColumns:"1fr auto",gap:12,alignItems:"center",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
       <div>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:5}}>
-          <span style={{color:tc,fontSize:11,fontWeight:800}}>{ti}</span>
-          <span style={{fontWeight:700,color:"#111827",fontSize:14}}>{s.name}</span>
+          <span style={{color:tc,fontSize:13,fontWeight:800}}>{ti}</span>
+          <span style={{fontWeight:700,color:"#111827",fontSize:16}}>{s.name}</span>
         </div>
-        <div style={{fontSize:12.5,color:"#6b7280",lineHeight:1.55}}>{s.desc}</div>
+        <div style={{fontSize:14.5,color:"#6b7280",lineHeight:1.55}}>{s.desc}</div>
       </div>
       <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:6,minWidth:100}}>
-        <span style={{color:rs.color,background:rs.bg,border:`1px solid ${rs.border}`,padding:"3px 10px",borderRadius:4,fontSize:11,fontWeight:700}}>{s.rating}</span>
-        <span style={{color:rb.color,background:rb.bg,padding:"2px 8px",borderRadius:4,fontSize:10,fontWeight:600}}>Risk: {s.risk}</span>
+        <span style={{color:rs.color,background:rs.bg,border:`1px solid ${rs.border}`,padding:"3px 10px",borderRadius:4,fontSize:13,fontWeight:700}}>{s.rating}</span>
+        <span style={{color:rb.color,background:rb.bg,padding:"2px 8px",borderRadius:4,fontSize:12,fontWeight:600}}>Risk: {s.risk}</span>
       </div>
     </div>
   );
@@ -265,16 +211,16 @@ function StockRow({ s }) {
   return (
     <div style={{display:"grid",gridTemplateColumns:"80px 1fr auto",gap:12,alignItems:"center",padding:"11px 0",borderBottom:"1px solid #f1f5f9"}}>
       <div>
-        <div style={{fontWeight:800,fontSize:14,color:"#111827",fontFamily:"monospace"}}>{s.ticker}</div>
-        <div style={{fontSize:10,color:"#94a3b8",marginTop:2}}>{s.sector}</div>
+        <div style={{fontWeight:800,fontSize:16,color:"#111827",fontFamily:"monospace"}}>{s.ticker}</div>
+        <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>{s.sector}</div>
       </div>
       <div>
-        <div style={{fontSize:13,color:"#374151",fontWeight:600}}>{s.name}</div>
-        <div style={{fontSize:11,color:"#9ca3af",marginTop:2}}>{s.note}</div>
+        <div style={{fontSize:15,color:"#374151",fontWeight:600}}>{s.name}</div>
+        <div style={{fontSize:13,color:"#9ca3af",marginTop:2}}>{s.note}</div>
       </div>
       <div style={{textAlign:"right"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#111827"}}>{s.price}</div>
-        <div style={{fontSize:12,fontWeight:700,color:s.up?"#059669":"#dc2626",marginTop:2}}>{s.change}</div>
+        <div style={{fontSize:16,fontWeight:700,color:"#111827"}}>{s.price}</div>
+        <div style={{fontSize:14,fontWeight:700,color:s.up?"#059669":"#dc2626",marginTop:2}}>{s.change}</div>
       </div>
     </div>
   );
@@ -285,51 +231,17 @@ function ETFRow({ e }) {
   return (
     <div style={{background:"#fff",border:"1px solid #e5e7eb",borderRadius:8,padding:"14px 18px",display:"grid",gridTemplateColumns:"90px 1fr auto",gap:12,alignItems:"center",boxShadow:"0 1px 3px rgba(0,0,0,.04)"}}>
       <div>
-        <div style={{fontWeight:800,fontSize:15,color:"#0057a8",fontFamily:"monospace"}}>{e.ticker}</div>
-        <div style={{fontSize:11,color:"#94a3b8",marginTop:2}}>TER: {e.ter}</div>
+        <div style={{fontWeight:800,fontSize:17,color:"#0057a8",fontFamily:"monospace"}}>{e.ticker}</div>
+        <div style={{fontSize:13,color:"#94a3b8",marginTop:2}}>TER: {e.ter}</div>
       </div>
       <div>
-        <div style={{fontSize:13,color:"#111827",fontWeight:600,lineHeight:1.3}}>{e.name}</div>
-        <div style={{fontSize:11,color:"#64748b",marginTop:3}}>{e.focus}</div>
-        <div style={{fontSize:12,marginTop:2,color:"#f59e0b"}}>{e.rating}</div>
+        <div style={{fontSize:15,color:"#111827",fontWeight:600,lineHeight:1.3}}>{e.name}</div>
+        <div style={{fontSize:13,color:"#64748b",marginTop:3}}>{e.focus}</div>
+        <div style={{fontSize:14,marginTop:2,color:"#f59e0b"}}>{e.rating}</div>
       </div>
       <div style={{textAlign:"right"}}>
-        <div style={{fontSize:15,fontWeight:800,color:positive?"#059669":"#dc2626"}}>{e.ytd}</div>
-        <div style={{fontSize:10,color:"#94a3b8",marginTop:2}}>YTD 2026</div>
-      </div>
-    </div>
-  );
-}
-
-// ─── FEATURE: ARTICLES ────────────────────────────────────────────────────────
-
-function ArticlesHub() {
-  const [openArticle, setOpenArticle] = useState(null);
-
-  if (openArticle) {
-    const a = ARTICLES.find(x => x.id === openArticle);
-    return (
-      <div style={{display:"flex",flexDirection:"column",gap:16,maxWidth:760,margin:"0 auto"}}>
-        <button onClick={()=>setOpenArticle(null)} style={{alignSelf:"flex-start",background:"none",border:"none",color:"#0057a8",fontSize:13,fontWeight:600,cursor:"pointer",padding:0}}>← Back to all articles</button>
-        <div style={{fontSize:11,color:"#94a3b8",fontWeight:600}}>{a.date} · {a.readTime}</div>
-        <h1 style={{margin:0,fontSize:26,fontWeight:800,color:"#0f172a",lineHeight:1.3}}>{a.title}</h1>
-        <div style={{fontSize:15,color:"#374151",lineHeight:1.85,whiteSpace:"pre-line"}}>{a.body}</div>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{display:"flex",flexDirection:"column",gap:20}}>
-      <SectionHeader sub="Insights & Analysis" title="Articles"/>
-      <div style={{display:"flex",flexDirection:"column",gap:14}}>
-        {ARTICLES.map(a=>(
-          <button key={a.id} onClick={()=>setOpenArticle(a.id)} style={{textAlign:"left",background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px 22px",cursor:"pointer",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:11,color:"#94a3b8",fontWeight:600,marginBottom:6}}>{a.date} · {a.readTime}</div>
-            <div style={{fontSize:17,fontWeight:700,color:"#0f172a",marginBottom:8,lineHeight:1.35}}>{a.title}</div>
-            <div style={{fontSize:13,color:"#64748b",lineHeight:1.6}}>{a.body.slice(0,140)}...</div>
-            <div style={{marginTop:10,fontSize:12,color:"#0057a8",fontWeight:700}}>Read more →</div>
-          </button>
-        ))}
+        <div style={{fontSize:17,fontWeight:800,color:positive?"#059669":"#dc2626"}}>{e.ytd}</div>
+        <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>YTD 2026</div>
       </div>
     </div>
   );
@@ -411,44 +323,40 @@ function PortfolioBuilder() {
         right={<Badge label="Interactive Tool" color="#1e40af" bg="#dbeafe" border="#93c5fd"/>}
       />
 
-      {/* Settings row */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"18px 20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-          <label style={{fontSize:12,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:8}}>Investment Amount</label>
+          <label style={{fontSize:14,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:8}}>Investment Amount</label>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
-            <span style={{fontSize:16,color:"#374151",fontWeight:700}}>$</span>
-            <input type="number" value={investment} onChange={e=>setInvestment(Number(e.target.value))} style={{flex:1,border:"1px solid #cbd5e1",borderRadius:6,padding:"8px 12px",fontSize:15,fontWeight:700,color:"#0f172a",outline:"none",width:"100%"}}/>
+            <span style={{fontSize:18,color:"#374151",fontWeight:700}}>$</span>
+            <input type="number" value={investment} onChange={e=>setInvestment(Number(e.target.value))} style={{flex:1,border:"1px solid #cbd5e1",borderRadius:6,padding:"8px 12px",fontSize:17,fontWeight:700,color:"#0f172a",outline:"none",width:"100%"}}/>
           </div>
         </div>
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"18px 20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-          <label style={{fontSize:12,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:8}}>Time Horizon: {horizon} years</label>
+          <label style={{fontSize:14,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:8}}>Time Horizon: {horizon} years</label>
           <input type="range" min={1} max={20} value={horizon} onChange={e=>setHorizon(Number(e.target.value))} style={{width:"100%",accentColor:"#0057a8"}}/>
-          <div style={{display:"flex",justifyContent:"space-between",fontSize:11,color:"#94a3b8",marginTop:4}}>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:13,color:"#94a3b8",marginTop:4}}>
             <span>1yr</span><span>5yr</span><span>10yr</span><span>20yr</span>
           </div>
         </div>
       </div>
 
-      {/* Allocation sliders + Projection */}
       <div style={{display:"grid",gridTemplateColumns:"1.4fr 1fr",gap:20,alignItems:"start"}}>
-        {/* Left: sliders */}
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
             <div>
-              <div style={{fontSize:13,fontWeight:700,color:"#111827"}}>Allocate Your Portfolio</div>
-              <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>Drag sliders to set % per asset</div>
+              <div style={{fontSize:15,fontWeight:700,color:"#111827"}}>Allocate Your Portfolio</div>
+              <div style={{fontSize:14,color:"#94a3b8",marginTop:2}}>Drag sliders to set % per asset</div>
             </div>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <div style={{fontSize:13,fontWeight:800,color:remaining<0?"#dc2626":remaining===0?"#059669":"#d97706"}}>
+              <div style={{fontSize:15,fontWeight:800,color:remaining<0?"#dc2626":remaining===0?"#059669":"#d97706"}}>
                 {remaining>=0?`${remaining}% remaining`:`${Math.abs(remaining)}% over!`}
               </div>
-              <button onClick={clearAll} style={{background:"none",border:"1px solid #e2e8f0",borderRadius:6,padding:"4px 10px",fontSize:11,color:"#64748b",cursor:"pointer"}}>Clear</button>
+              <button onClick={clearAll} style={{background:"none",border:"1px solid #e2e8f0",borderRadius:6,padding:"4px 10px",fontSize:13,color:"#64748b",cursor:"pointer"}}>Clear</button>
             </div>
           </div>
-          {/* Type labels */}
           {["Stock","ETF"].map(type=>(
             <div key={type}>
-              <div style={{fontSize:10,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,margin:"12px 0 8px",borderBottom:"1px solid #f1f5f9",paddingBottom:4}}>{type}s</div>
+              <div style={{fontSize:12,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,margin:"12px 0 8px",borderBottom:"1px solid #f1f5f9",paddingBottom:4}}>{type}s</div>
               {PORTFOLIO_ASSETS.filter(a=>a.type===type).map(a=>{
                 const alloc=allocations[a.id]||0;
                 return (
@@ -456,17 +364,17 @@ function PortfolioBuilder() {
                     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
                       <div style={{display:"flex",alignItems:"center",gap:8}}>
                         <div style={{width:10,height:10,borderRadius:2,background:a.color,flexShrink:0}}/>
-                        <span style={{fontSize:13,fontWeight:600,color:"#111827"}}>{a.id}</span>
-                        <span style={{fontSize:11,color:"#94a3b8"}}>{a.name}</span>
+                        <span style={{fontSize:15,fontWeight:600,color:"#111827"}}>{a.id}</span>
+                        <span style={{fontSize:13,color:"#94a3b8"}}>{a.name}</span>
                         <Badge label={a.risk+' Risk'} color={a.risk==='Low'?"#065f46":a.risk==='High'?"#991b1b":"#92400e"} bg={a.risk==='Low'?"#d1fae5":a.risk==='High'?"#fee2e2":"#fef3c7"} border="transparent"/>
                       </div>
                       <div style={{display:"flex",alignItems:"center",gap:6}}>
-                        <input type="number" value={alloc||""} placeholder="0" onChange={e=>setAlloc(a.id,e.target.value)} style={{width:48,border:"1px solid #cbd5e1",borderRadius:4,padding:"2px 6px",fontSize:12,fontWeight:700,textAlign:"center",outline:"none"}}/>
-                        <span style={{fontSize:12,color:"#64748b"}}>%</span>
+                        <input type="number" value={alloc||""} placeholder="0" onChange={e=>setAlloc(a.id,e.target.value)} style={{width:52,border:"1px solid #cbd5e1",borderRadius:4,padding:"2px 6px",fontSize:14,fontWeight:700,textAlign:"center",outline:"none"}}/>
+                        <span style={{fontSize:14,color:"#64748b"}}>%</span>
                       </div>
                     </div>
                     <input type="range" min={0} max={100} value={alloc} onChange={e=>setAlloc(a.id,e.target.value)} style={{width:"100%",accentColor:a.color,height:4}}/>
-                    <div style={{display:"flex",justifyContent:"space-between",fontSize:10,color:"#94a3b8",marginTop:1}}>
+                    <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#94a3b8",marginTop:1}}>
                       <span>Est. return: {a.expectedReturn}%/yr</span>
                       <span>Div yield: {a.divYield}%</span>
                     </div>
@@ -477,42 +385,38 @@ function PortfolioBuilder() {
           ))}
         </div>
 
-        {/* Right: projection panel */}
         <div style={{display:"flex",flexDirection:"column",gap:16}}>
-          {/* Main projection card */}
           <div style={{background:"linear-gradient(135deg,#0057a8,#0a6640)",borderRadius:10,padding:"22px",color:"#fff"}}>
-            <div style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:1,opacity:.8,marginBottom:8}}>Projected Portfolio Value</div>
-            <div style={{fontSize:32,fontWeight:900,letterSpacing:-1}}>${total>0?Math.round(proj).toLocaleString():"—"}</div>
-            <div style={{fontSize:13,opacity:.85,marginTop:4}}>after {horizon} year{horizon!==1?"s":""}</div>
+            <div style={{fontSize:13,fontWeight:700,textTransform:"uppercase",letterSpacing:1,opacity:.8,marginBottom:8}}>Projected Portfolio Value</div>
+            <div style={{fontSize:34,fontWeight:900,letterSpacing:-1}}>${total>0?Math.round(proj).toLocaleString():"—"}</div>
+            <div style={{fontSize:15,opacity:.85,marginTop:4}}>after {horizon} year{horizon!==1?"s":""}</div>
             {total>0&&(
               <div style={{marginTop:16,background:"rgba(255,255,255,.15)",borderRadius:8,padding:"12px 14px"}}>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
                   <div>
-                    <div style={{fontSize:10,opacity:.7,marginBottom:3}}>TOTAL GAIN</div>
-                    <div style={{fontSize:16,fontWeight:800,color:gain>=0?"#86efac":"#fca5a5"}}>{gain>=0?"+":"-"}${Math.abs(Math.round(gain)).toLocaleString()}</div>
+                    <div style={{fontSize:12,opacity:.7,marginBottom:3}}>TOTAL GAIN</div>
+                    <div style={{fontSize:18,fontWeight:800,color:gain>=0?"#86efac":"#fca5a5"}}>{gain>=0?"+":"-"}${Math.abs(Math.round(gain)).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div style={{fontSize:10,opacity:.7,marginBottom:3}}>RETURN</div>
-                    <div style={{fontSize:16,fontWeight:800}}>{total>0?((proj/investment-1)*100).toFixed(1):0}%</div>
+                    <div style={{fontSize:12,opacity:.7,marginBottom:3}}>RETURN</div>
+                    <div style={{fontSize:18,fontWeight:800}}>{total>0?((proj/investment-1)*100).toFixed(1):0}%</div>
                   </div>
                   <div>
-                    <div style={{fontSize:10,opacity:.7,marginBottom:3}}>ANNUAL DIVIDEND</div>
-                    <div style={{fontSize:16,fontWeight:800}}>${Math.round(investment*(total/100)*weightedDividend()/100).toLocaleString()}</div>
+                    <div style={{fontSize:12,opacity:.7,marginBottom:3}}>ANNUAL DIVIDEND</div>
+                    <div style={{fontSize:18,fontWeight:800}}>${Math.round(investment*(total/100)*weightedDividend()/100).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div style={{fontSize:10,opacity:.7,marginBottom:3}}>RISK PROFILE</div>
-                    <div style={{fontSize:14,fontWeight:800}}>{riskProfile.label}</div>
+                    <div style={{fontSize:12,opacity:.7,marginBottom:3}}>RISK PROFILE</div>
+                    <div style={{fontSize:16,fontWeight:800}}>{riskProfile.label}</div>
                   </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Progress bar by sector */}
           {selected.length>0&&(
             <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"18px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-              <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:12}}>Portfolio Breakdown</div>
-              {/* visual bar */}
+              <div style={{fontSize:14,fontWeight:700,color:"#374151",marginBottom:12}}>Portfolio Breakdown</div>
               <div style={{display:"flex",height:14,borderRadius:7,overflow:"hidden",marginBottom:14,gap:1}}>
                 {selected.map(a=>(
                   <div key={a.id} title={`${a.id}: ${allocations[a.id]}%`} style={{width:`${allocations[a.id]}%`,background:a.color,transition:"width .3s"}}/>
@@ -523,30 +427,29 @@ function PortfolioBuilder() {
                 <div key={a.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"4px 0",borderBottom:"1px solid #f8fafc"}}>
                   <div style={{display:"flex",alignItems:"center",gap:6}}>
                     <div style={{width:8,height:8,borderRadius:2,background:a.color}}/>
-                    <span style={{fontSize:12,color:"#374151",fontWeight:600}}>{a.id}</span>
-                    <span style={{fontSize:11,color:"#94a3b8"}}>{a.sector}</span>
+                    <span style={{fontSize:14,color:"#374151",fontWeight:600}}>{a.id}</span>
+                    <span style={{fontSize:13,color:"#94a3b8"}}>{a.sector}</span>
                   </div>
-                  <div style={{fontSize:12,fontWeight:700,color:"#111827"}}>{allocations[a.id]}%</div>
+                  <div style={{fontSize:14,fontWeight:700,color:"#111827"}}>{allocations[a.id]}%</div>
                 </div>
               ))}
-              <div style={{fontSize:10,color:"#94a3b8",marginTop:10,lineHeight:1.5}}>⚠️ Projections are illustrative estimates based on historical sector data. Not a guarantee of future returns.</div>
+              <div style={{fontSize:12,color:"#94a3b8",marginTop:10,lineHeight:1.5}}>⚠️ Projections are illustrative estimates based on historical sector data. Not a guarantee of future returns.</div>
             </div>
           )}
 
-          {/* AI Analysis Button */}
           <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"18px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:10}}>🤖 AI Portfolio Analysis</div>
-            <button onClick={getAiAnalysis} disabled={aiLoading||selected.length===0} style={{width:"100%",background:selected.length===0?"#f1f5f9":"#0057a8",color:selected.length===0?"#94a3b8":"#fff",border:"none",borderRadius:7,padding:"10px",fontSize:13,fontWeight:700,cursor:selected.length===0?"default":"pointer",marginBottom:10}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#374151",marginBottom:10}}>🤖 AI Portfolio Analysis</div>
+            <button onClick={getAiAnalysis} disabled={aiLoading||selected.length===0} style={{width:"100%",background:selected.length===0?"#f1f5f9":"#0057a8",color:selected.length===0?"#94a3b8":"#fff",border:"none",borderRadius:7,padding:"10px",fontSize:15,fontWeight:700,cursor:selected.length===0?"default":"pointer",marginBottom:10}}>
               {aiLoading?<><LoadingDots/> Analysing…</>:"Analyse My Portfolio"}
             </button>
-            {aiLoading&&<div style={{fontSize:13,color:"#1e40af",display:"flex",alignItems:"center",gap:8}}><LoadingDots/>Checking current market conditions…</div>}
-            {aiAnalysis&&!aiLoading&&<p style={{margin:0,fontSize:13,color:"#1e3a5f",lineHeight:1.7,background:"#f0f9ff",borderRadius:7,padding:"12px 14px",border:"1px solid #bae6fd"}}>{aiAnalysis}</p>}
-            {!aiAnalysis&&!aiLoading&&selected.length===0&&<p style={{margin:0,fontSize:12,color:"#94a3b8",fontStyle:"italic"}}>Add assets to your portfolio above, then click Analyse.</p>}
+            {aiLoading&&<div style={{fontSize:15,color:"#1e40af",display:"flex",alignItems:"center",gap:8}}><LoadingDots/>Checking current market conditions…</div>}
+            {aiAnalysis&&!aiLoading&&<p style={{margin:0,fontSize:15,color:"#1e3a5f",lineHeight:1.7,background:"#f0f9ff",borderRadius:7,padding:"12px 14px",border:"1px solid #bae6fd"}}>{aiAnalysis}</p>}
+            {!aiAnalysis&&!aiLoading&&selected.length===0&&<p style={{margin:0,fontSize:14,color:"#94a3b8",fontStyle:"italic"}}>Add assets to your portfolio above, then click Analyse.</p>}
           </div>
         </div>
       </div>
 
-      <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"12px 16px",fontSize:12,color:"#92400e"}}>
+      <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"12px 16px",fontSize:14,color:"#92400e"}}>
         ⚠️ <strong>Disclaimer:</strong> Portfolio projections are educational estimates based on historical sector averages. Past performance does not guarantee future results. Always consult a licensed financial adviser before investing.
       </div>
     </div>
@@ -579,47 +482,43 @@ function AIEnergyTracker() {
         sub="Feature 2 of 3 · Live AI-Powered"
         title="AI + Energy Demand Tracker"
         right={
-          <button onClick={fetchInsight} disabled={aiLoading} style={{background:aiLoading?"#e2e8f0":"#7c3aed",color:aiLoading?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"8px 16px",fontSize:12,fontWeight:700,cursor:aiLoading?"default":"pointer",display:"flex",alignItems:"center",gap:6}}>
+          <button onClick={fetchInsight} disabled={aiLoading} style={{background:aiLoading?"#e2e8f0":"#7c3aed",color:aiLoading?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"8px 16px",fontSize:14,fontWeight:700,cursor:aiLoading?"default":"pointer",display:"flex",alignItems:"center",gap:6}}>
             {aiLoading?<><LoadingDots/>Updating…</>:"↺ Refresh Live Data"}
           </button>
         }
       />
 
-      {/* Live AI Briefing */}
       <div style={{background:"#fff",border:"1px solid #ddd6fe",borderLeft:"4px solid #7c3aed",borderRadius:8,padding:"20px 22px",boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
           <Badge label="🤖 Live AI Briefing" color="#6d28d9" bg="#ede9fe" border="#c4b5fd"/>
-          <span style={{fontSize:11,color:"#94a3b8",marginLeft:"auto"}}>Web Search · {new Date().toLocaleDateString()}</span>
+          <span style={{fontSize:13,color:"#94a3b8",marginLeft:"auto"}}>Web Search · {new Date().toLocaleDateString()}</span>
         </div>
         {aiLoading
-          ?<div style={{color:"#6d28d9",fontSize:14,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching for the latest AI energy deals and power demand news…</div>
-          :<p style={{margin:0,fontSize:14,color:"#2e1065",lineHeight:1.75}}>{aiInsight||"Click Refresh to load the latest AI energy intelligence."}</p>
+          ?<div style={{color:"#6d28d9",fontSize:16,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching for the latest AI energy deals and power demand news…</div>
+          :<p style={{margin:0,fontSize:16,color:"#2e1065",lineHeight:1.75}}>{aiInsight||"Click Refresh to load the latest AI energy intelligence."}</p>
         }
       </div>
 
-      {/* Key stats */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:14}}>
         {AI_ENERGY_STATS.map(s=>(
           <div key={s.label} style={{background:"#fff",border:"1px solid #e2e8f0",borderTop:`3px solid ${s.color}`,borderRadius:10,padding:"16px 18px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:11,color:"#94a3b8",fontWeight:600,textTransform:"uppercase",letterSpacing:.5,marginBottom:6}}>{s.label}</div>
-            <div style={{fontSize:26,fontWeight:900,color:s.color,lineHeight:1}}>{s.value}</div>
-            <div style={{fontSize:11,color:"#64748b",marginTop:5}}>{s.sub}</div>
+            <div style={{fontSize:13,color:"#94a3b8",fontWeight:600,textTransform:"uppercase",letterSpacing:.5,marginBottom:6}}>{s.label}</div>
+            <div style={{fontSize:28,fontWeight:900,color:s.color,lineHeight:1}}>{s.value}</div>
+            <div style={{fontSize:13,color:"#64748b",marginTop:5}}>{s.sub}</div>
           </div>
         ))}
       </div>
 
-      {/* Sub tabs */}
       <div style={{display:"flex",gap:8}}>
         {subTabs.map(([id,label])=>(
-          <button key={id} onClick={()=>setActiveTab(id)} style={{background:activeTab===id?"#7c3aed":"#fff",color:activeTab===id?"#fff":"#374151",border:"1px solid",borderColor:activeTab===id?"#7c3aed":"#e2e8f0",borderRadius:6,padding:"8px 16px",fontSize:13,fontWeight:600,cursor:"pointer"}}>{label}</button>
+          <button key={id} onClick={()=>setActiveTab(id)} style={{background:activeTab===id?"#7c3aed":"#fff",color:activeTab===id?"#fff":"#374151",border:"1px solid",borderColor:activeTab===id?"#7c3aed":"#e2e8f0",borderRadius:6,padding:"8px 16px",fontSize:15,fontWeight:600,cursor:"pointer"}}>{label}</button>
         ))}
       </div>
 
-      {/* Overview */}
       {activeTab==="overview"&&(
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
           <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:14}}>Why AI + Energy is the #1 Investment Theme of 2026</div>
+            <div style={{fontSize:15,fontWeight:700,color:"#374151",marginBottom:14}}>Why AI + Energy is the #1 Investment Theme of 2026</div>
             {[
               {icon:"🤖",title:"AI is insatiable for power","desc":"Each ChatGPT query uses ~10x more energy than a Google search. As AI usage compounds, so does power demand — permanently."},
               {icon:"🏗️",title:"Grid is the new bottleneck","desc":"Even when clean power exists, getting it to data centers is blocked by interconnection queues, aging substations, and slow permitting."},
@@ -627,16 +526,16 @@ function AIEnergyTracker() {
               {icon:"💡",title:"Investors can own the whole chain","desc":"From uranium miners (CCJ) to grid builders (GEV) to power utilities (NEE) — every link in the AI power chain is investable today."},
             ].map(item=>(
               <div key={item.title} style={{display:"grid",gridTemplateColumns:"36px 1fr",gap:10,marginBottom:14,paddingBottom:14,borderBottom:"1px solid #f8fafc"}}>
-                <div style={{fontSize:20,lineHeight:1}}>{item.icon}</div>
+                <div style={{fontSize:22,lineHeight:1}}>{item.icon}</div>
                 <div>
-                  <div style={{fontWeight:700,fontSize:13,color:"#111827",marginBottom:3}}>{item.title}</div>
-                  <div style={{fontSize:12,color:"#6b7280",lineHeight:1.55}}>{item.desc}</div>
+                  <div style={{fontWeight:700,fontSize:15,color:"#111827",marginBottom:3}}>{item.title}</div>
+                  <div style={{fontSize:14,color:"#6b7280",lineHeight:1.55}}>{item.desc}</div>
                 </div>
               </div>
             ))}
           </div>
           <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:14}}>Stocks Most Exposed to AI Power Demand</div>
+            <div style={{fontSize:15,fontWeight:700,color:"#374151",marginBottom:14}}>Stocks Most Exposed to AI Power Demand</div>
             {[
               {ticker:"GEV",name:"GE Vernova",exposure:"VERY HIGH",color:"#dc2626",why:"Gas turbines + grid equipment — direct supplier to data center power buildout"},
               {ticker:"NEE",name:"NextEra Energy",exposure:"HIGH",color:"#d97706",why:"Largest US renewable utility — primary hyperscaler PPA counterparty"},
@@ -648,10 +547,10 @@ function AIEnergyTracker() {
               <div key={s.ticker} style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"8px 0",borderBottom:"1px solid #f8fafc",gap:10}}>
                 <div>
                   <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{fontFamily:"monospace",fontWeight:800,fontSize:13,color:"#111827"}}>{s.ticker}</span>
-                    <span style={{fontSize:12,color:"#64748b"}}>{s.name}</span>
+                    <span style={{fontFamily:"monospace",fontWeight:800,fontSize:15,color:"#111827"}}>{s.ticker}</span>
+                    <span style={{fontSize:14,color:"#64748b"}}>{s.name}</span>
                   </div>
-                  <div style={{fontSize:11,color:"#94a3b8",marginTop:2}}>{s.why}</div>
+                  <div style={{fontSize:13,color:"#94a3b8",marginTop:2}}>{s.why}</div>
                 </div>
                 <Badge label={s.exposure} color={s.color} bg={s.color==="#dc2626"?"#fee2e2":s.color==="#d97706"?"#fef3c7":"#dbeafe"} border="transparent"/>
               </div>
@@ -660,19 +559,18 @@ function AIEnergyTracker() {
         </div>
       )}
 
-      {/* Deals table */}
       {activeTab==="deals"&&(
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-          <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:4}}>Hyperscaler Energy Deals — Complete Database</div>
-          <div style={{fontSize:12,color:"#94a3b8",marginBottom:16}}>Every major AI company energy deal tracked — updated by AI with web search</div>
+          <div style={{fontSize:15,fontWeight:700,color:"#374151",marginBottom:4}}>Hyperscaler Energy Deals — Complete Database</div>
+          <div style={{fontSize:14,color:"#94a3b8",marginBottom:16}}>Every major AI company energy deal tracked — updated by AI with web search</div>
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
             {AI_ENERGY_DEALS.map((d,i)=>(
               <div key={i} style={{border:"1px solid #f1f5f9",borderLeft:`4px solid ${d.status==="Cancelled"?"#dc2626":d.type==="Acquisition"?"#7c3aed":"#0057a8"}`,borderRadius:8,padding:"14px 16px"}}>
                 <div style={{display:"grid",gridTemplateColumns:"1fr auto",gap:10,marginBottom:8}}>
                   <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
-                    <span style={{fontWeight:800,fontSize:14,color:"#0f172a"}}>{d.company}</span>
-                    <span style={{fontSize:12,color:"#94a3b8"}}>→</span>
-                    <span style={{fontWeight:600,fontSize:13,color:"#374151"}}>{d.target}</span>
+                    <span style={{fontWeight:800,fontSize:16,color:"#0f172a"}}>{d.company}</span>
+                    <span style={{fontSize:14,color:"#94a3b8"}}>→</span>
+                    <span style={{fontWeight:600,fontSize:15,color:"#374151"}}>{d.target}</span>
                   </div>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap",justifyContent:"flex-end"}}>
                     <Badge label={d.year} color="#374151" bg="#f3f4f6" border="#e5e7eb"/>
@@ -681,21 +579,20 @@ function AIEnergyTracker() {
                   </div>
                 </div>
                 <div style={{display:"flex",gap:16,marginBottom:8,flexWrap:"wrap"}}>
-                  <div style={{fontSize:12,color:"#374151"}}><span style={{color:"#94a3b8"}}>Value: </span><strong>{d.value}</strong></div>
-                  <div style={{fontSize:12,color:"#374151"}}><span style={{color:"#94a3b8"}}>Sector: </span><strong>{d.sector}</strong></div>
+                  <div style={{fontSize:14,color:"#374151"}}><span style={{color:"#94a3b8"}}>Value: </span><strong>{d.value}</strong></div>
+                  <div style={{fontSize:14,color:"#374151"}}><span style={{color:"#94a3b8"}}>Sector: </span><strong>{d.sector}</strong></div>
                 </div>
-                <div style={{fontSize:12,color:"#4b5563",background:"#f8fafc",borderRadius:6,padding:"8px 10px",lineHeight:1.5}}>💡 {d.impact}</div>
+                <div style={{fontSize:14,color:"#4b5563",background:"#f8fafc",borderRadius:6,padding:"8px 10px",lineHeight:1.5}}>💡 {d.impact}</div>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Timeline */}
       {activeTab==="timeline"&&(
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-          <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:4}}>AI Power Demand Growth Timeline</div>
-          <div style={{fontSize:12,color:"#94a3b8",marginBottom:20}}>From niche concern to the #1 global grid challenge — 2023 to 2030</div>
+          <div style={{fontSize:15,fontWeight:700,color:"#374151",marginBottom:4}}>AI Power Demand Growth Timeline</div>
+          <div style={{fontSize:14,color:"#94a3b8",marginBottom:20}}>From niche concern to the #1 global grid challenge — 2023 to 2030</div>
           {AI_POWER_TIMELINE.map((item,i)=>{
             const maxPow=0.85;
             const pct=(item.powerTW/maxPow)*100;
@@ -703,20 +600,20 @@ function AIEnergyTracker() {
             return (
               <div key={item.year} style={{display:"grid",gridTemplateColumns:"70px 1fr",gap:16,marginBottom:20,alignItems:"start"}}>
                 <div style={{textAlign:"right"}}>
-                  <div style={{fontWeight:800,fontSize:14,color:isForecast?"#94a3b8":"#0f172a"}}>{item.year}</div>
-                  <div style={{fontSize:10,color:"#94a3b8",marginTop:2}}>{isForecast?"Forecast":"Actual"}</div>
+                  <div style={{fontWeight:800,fontSize:16,color:isForecast?"#94a3b8":"#0f172a"}}>{item.year}</div>
+                  <div style={{fontSize:12,color:"#94a3b8",marginTop:2}}>{isForecast?"Forecast":"Actual"}</div>
                 </div>
                 <div>
-                  <div style={{fontSize:12,color:"#374151",marginBottom:6,lineHeight:1.4}}>{item.event}</div>
+                  <div style={{fontSize:14,color:"#374151",marginBottom:6,lineHeight:1.4}}>{item.event}</div>
                   <div style={{background:"#f1f5f9",borderRadius:4,height:12,overflow:"hidden",position:"relative"}}>
                     <div style={{width:`${pct}%`,height:"100%",background:isForecast?"#a78bfa":"#7c3aed",borderRadius:4,transition:"width 1s",opacity:isForecast?.6:1}}/>
                   </div>
-                  <div style={{fontSize:11,color:"#94a3b8",marginTop:3}}>~{item.powerTW} TW equivalent AI power demand</div>
+                  <div style={{fontSize:13,color:"#94a3b8",marginTop:3}}>~{item.powerTW} TW equivalent AI power demand</div>
                 </div>
               </div>
             );
           })}
-          <div style={{background:"#f5f3ff",border:"1px solid #ddd6fe",borderRadius:8,padding:"12px 16px",fontSize:12,color:"#5b21b6",marginTop:8,lineHeight:1.6}}>
+          <div style={{background:"#f5f3ff",border:"1px solid #ddd6fe",borderRadius:8,padding:"12px 16px",fontSize:14,color:"#5b21b6",marginTop:8,lineHeight:1.6}}>
             📌 <strong>Key insight for investors:</strong> Power demand from AI is not cyclical — it compounds with AI adoption. Every dollar spent on AI chips drives $3–$5 of energy infrastructure investment. The grid bottleneck means energy stocks benefit even if AI growth slows, because catching up takes years.
           </div>
         </div>
@@ -732,7 +629,6 @@ function NewsletterHub() {
   const [previewContent, setPreviewContent] = useState("");
   const [previewGenerated, setPreviewGenerated] = useState(false);
 
-  // Real subscribe page — every signup here goes into an actual Beehiiv list.
   const SUBSCRIBE_URL = "https://energyinvestorhub.beehiiv.com/subscribe";
 
   const generatePreview = async () => {
@@ -750,12 +646,12 @@ function NewsletterHub() {
     return text.split("\n").filter(l=>l.trim()).map((line,i)=>{
       if(line.match(/^#{1,3} /)||line.match(/^\*\*[A-Z]/)||line.match(/^[A-Z][A-Z\s]+:/)||line.match(/^\d\)/)) {
         const clean=line.replace(/^#{1,3} /,"").replace(/\*\*/g,"").replace(/:/,"");
-        return <div key={i} style={{fontWeight:800,fontSize:14,color:"#0057a8",marginTop:i>0?20:0,marginBottom:6,borderBottom:"2px solid #e2e8f0",paddingBottom:6}}>{clean}</div>;
+        return <div key={i} style={{fontWeight:800,fontSize:16,color:"#0057a8",marginTop:i>0?20:0,marginBottom:6,borderBottom:"2px solid #e2e8f0",paddingBottom:6}}>{clean}</div>;
       }
       if(line.startsWith("- ")||line.startsWith("• ")) {
-        return <div key={i} style={{display:"flex",gap:8,marginBottom:6}}><span style={{color:"#0057a8",fontWeight:700,flexShrink:0}}>•</span><span style={{fontSize:13,color:"#374151",lineHeight:1.65}}>{line.replace(/^[•\-] /,"")}</span></div>;
+        return <div key={i} style={{display:"flex",gap:8,marginBottom:6}}><span style={{color:"#0057a8",fontWeight:700,flexShrink:0}}>•</span><span style={{fontSize:15,color:"#374151",lineHeight:1.65}}>{line.replace(/^[•\-] /,"")}</span></div>;
       }
-      return <p key={i} style={{margin:"0 0 10px",fontSize:13,color:"#374151",lineHeight:1.7}}>{line}</p>;
+      return <p key={i} style={{margin:"0 0 10px",fontSize:15,color:"#374151",lineHeight:1.7}}>{line}</p>;
     });
   };
 
@@ -768,16 +664,14 @@ function NewsletterHub() {
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,alignItems:"start"}}>
 
-        {/* Left: Sign up */}
         <div style={{display:"flex",flexDirection:"column",gap:16}}>
-          {/* Value props */}
           <div style={{background:"linear-gradient(135deg,#0057a8,#7c3aed)",borderRadius:10,padding:"22px",color:"#fff"}}>
-            <div style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:1.5,opacity:.8,marginBottom:8}}>Every Monday Morning</div>
-            <h3 style={{margin:"0 0 10px",fontSize:18,fontWeight:800,lineHeight:1.2}}>The Energy Investor Briefing</h3>
-            <p style={{margin:"0 0 16px",fontSize:13,opacity:.9,lineHeight:1.65}}>5 minutes every Monday. Everything you need to know about energy investing this week — curated from BlackRock, IEA, Morningstar and real-time AI web search.</p>
+            <div style={{fontSize:13,fontWeight:700,textTransform:"uppercase",letterSpacing:1.5,opacity:.8,marginBottom:8}}>Every Monday Morning</div>
+            <h3 style={{margin:"0 0 10px",fontSize:20,fontWeight:800,lineHeight:1.2}}>The Energy Investor Briefing</h3>
+            <p style={{margin:"0 0 16px",fontSize:15,opacity:.9,lineHeight:1.65}}>5 minutes every Monday. Everything you need to know about energy investing this week — curated from BlackRock, IEA, Morningstar and real-time AI web search.</p>
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
               {["📊 ONE BIG THING — Week's #1 energy investment story","⚡ SECTOR WATCH — What's moving and why","🤝 DEAL OF THE WEEK — Key M&A & PPA signed","📈 CHART TO WATCH — One data trend to track","💡 READER TIP — One action to take this week"].map(item=>(
-                <div key={item} style={{display:"flex",alignItems:"flex-start",gap:8,fontSize:12,opacity:.92,lineHeight:1.4}}>
+                <div key={item} style={{display:"flex",alignItems:"flex-start",gap:8,fontSize:14,opacity:.92,lineHeight:1.4}}>
                   <span style={{flexShrink:0}}>{item.split("—")[0]}</span>
                   <span style={{opacity:.8}}>— {item.split("—")[1]}</span>
                 </div>
@@ -785,51 +679,48 @@ function NewsletterHub() {
             </div>
           </div>
 
-          {/* Real signup — links out to the actual Beehiiv subscribe page */}
           <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-            <div style={{fontSize:14,fontWeight:700,color:"#0f172a",marginBottom:4}}>Subscribe — Free Forever</div>
-            <div style={{fontSize:12,color:"#94a3b8",marginBottom:16}}>No spam, ever. Unsubscribe anytime.</div>
-            <div style={{fontSize:12,color:"#64748b",fontWeight:600,marginBottom:8}}>Topics we cover:</div>
+            <div style={{fontSize:16,fontWeight:700,color:"#0f172a",marginBottom:4}}>Subscribe — Free Forever</div>
+            <div style={{fontSize:14,color:"#94a3b8",marginBottom:16}}>No spam, ever. Unsubscribe anytime.</div>
+            <div style={{fontSize:14,color:"#64748b",fontWeight:600,marginBottom:8}}>Topics we cover:</div>
             <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:16}}>
               {["Solar & Wind","Nuclear","Grid Infrastructure","LNG & Gas","Battery Storage","Hydrogen","ETFs & Funds","M&A Deals"].map(item=>(
-                <span key={item} style={{background:"#f8fafc",color:"#374151",border:"1px solid #e2e8f0",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:500}}>{item}</span>
+                <span key={item} style={{background:"#f8fafc",color:"#374151",border:"1px solid #e2e8f0",borderRadius:20,padding:"5px 12px",fontSize:14,fontWeight:500}}>{item}</span>
               ))}
             </div>
-            <a href={SUBSCRIBE_URL} target="_blank" rel="noreferrer" style={{display:"block",textAlign:"center",textDecoration:"none",background:"#0057a8",color:"#fff",border:"none",borderRadius:7,padding:"12px",fontSize:14,fontWeight:700}}>
+            <a href={SUBSCRIBE_URL} target="_blank" rel="noreferrer" style={{display:"block",textAlign:"center",textDecoration:"none",background:"#0057a8",color:"#fff",border:"none",borderRadius:7,padding:"12px",fontSize:16,fontWeight:700}}>
               Subscribe Free →
             </a>
           </div>
         </div>
 
-        {/* Right: Live preview */}
         <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
             <div>
-              <div style={{fontSize:13,fontWeight:700,color:"#111827"}}>📬 This Week's Edition Preview</div>
-              <div style={{fontSize:11,color:"#94a3b8",marginTop:2}}>Generated live with AI + web search</div>
+              <div style={{fontSize:15,fontWeight:700,color:"#111827"}}>📬 This Week's Edition Preview</div>
+              <div style={{fontSize:13,color:"#94a3b8",marginTop:2}}>Generated live with AI + web search</div>
             </div>
-            <button onClick={generatePreview} disabled={previewLoading} style={{background:previewLoading?"#e2e8f0":"#0f172a",color:previewLoading?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:previewLoading?"default":"pointer",display:"flex",alignItems:"center",gap:6}}>
+            <button onClick={generatePreview} disabled={previewLoading} style={{background:previewLoading?"#e2e8f0":"#0f172a",color:previewLoading?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontSize:14,fontWeight:600,cursor:previewLoading?"default":"pointer",display:"flex",alignItems:"center",gap:6}}>
               {previewLoading?<><LoadingDots/>Generating…</>:previewGenerated?"↺ Regenerate":"Generate Preview"}
             </button>
           </div>
 
-          {/* Newsletter header */}
           <div style={{background:"#0f172a",borderRadius:"8px 8px 0 0",padding:"16px 20px",marginBottom:0}}>
-            <div style={{fontSize:10,color:"#94a3b8",letterSpacing:1.5,textTransform:"uppercase",marginBottom:4}}>ENERGY INVESTOR HUB</div>
-            <div style={{fontSize:16,fontWeight:800,color:"#fff"}}>⚡ Monday Briefing</div>
-            <div style={{fontSize:11,color:"#64748b",marginTop:3}}>Week of {new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
+            <div style={{fontSize:12,color:"#94a3b8",letterSpacing:1.5,textTransform:"uppercase",marginBottom:4}}>ENERGY INVESTOR HUB</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#fff"}}>⚡ Monday Briefing</div>
+            <div style={{fontSize:13,color:"#64748b",marginTop:3}}>Week of {new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
           </div>
           <div style={{border:"1px solid #e2e8f0",borderTop:"none",borderRadius:"0 0 8px 8px",padding:"20px",minHeight:200}}>
             {previewLoading&&(
               <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:180,gap:12}}>
                 <LoadingDots/>
-                <div style={{fontSize:13,color:"#64748b"}}>Writing this week's edition using live web search…</div>
+                <div style={{fontSize:15,color:"#64748b"}}>Writing this week's edition using live web search…</div>
               </div>
             )}
             {!previewLoading&&!previewContent&&(
               <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:180,gap:10,textAlign:"center"}}>
                 <div style={{fontSize:32}}>📰</div>
-                <div style={{fontSize:13,color:"#94a3b8"}}>Click 'Generate Preview' to see this week's live AI-written newsletter edition, sourced from real-time web data.</div>
+                <div style={{fontSize:15,color:"#94a3b8"}}>Click 'Generate Preview' to see this week's live AI-written newsletter edition, sourced from real-time web data.</div>
               </div>
             )}
             {!previewLoading&&previewContent&&(
@@ -875,7 +766,6 @@ export default function EnergyInvestorHub() {
     {id:"portfolio",label:"🏗 Portfolio Builder"},
     {id:"ai-energy",label:"🤖 AI + Energy Tracker"},
     {id:"newsletter",label:"📬 Newsletter"},
-    {id:"articles",label:"📝 Articles"},
     {id:"trading",label:"Trading & ETFs"},
     {id:"sectors",label:"Sector Ratings"},
     {id:"insights",label:"Expert Insights"},
@@ -886,22 +776,21 @@ export default function EnergyInvestorHub() {
 
   const S={
     card:{background:"#fff",border:"1px solid #e2e8f0",borderRadius:8,padding:"20px",boxShadow:"0 1px 3px rgba(0,0,0,.05)"},
-    sectionTitle:{margin:"0 0 14px",fontSize:12,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:1},
-    pageNote:{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:8,padding:"14px 18px",marginBottom:20,fontSize:13,color:"#64748b",lineHeight:1.6},
+    sectionTitle:{margin:"0 0 14px",fontSize:14,color:"#64748b",fontWeight:700,textTransform:"uppercase",letterSpacing:1},
+    pageNote:{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:8,padding:"14px 18px",marginBottom:20,fontSize:15,color:"#64748b",lineHeight:1.6},
   };
 
   return (
-    <div style={{minHeight:"100vh",background:"transparent",color:"#111827",fontFamily:"'Inter','Segoe UI',Arial,sans-serif",position:"relative"}}>
-      {/* Hamburger navigation drawer */}
+    <div style={{minHeight:"100vh",background:"transparent",color:"#111827",fontFamily:"'Inter','Segoe UI',Arial,sans-serif",position:"relative",fontSize:16}}>
       {menuOpen&&(
         <div onClick={()=>setMenuOpen(false)} style={{position:"fixed",inset:0,background:"rgba(15,23,42,0.5)",zIndex:100,display:"flex"}}>
           <div onClick={e=>e.stopPropagation()} style={{width:280,maxWidth:"80vw",background:"#fff",height:"100%",boxShadow:"2px 0 20px rgba(0,0,0,.2)",padding:"20px 0",overflowY:"auto",animation:"slideIn .25s ease-out"}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"0 20px 16px",borderBottom:"1px solid #f1f5f9",marginBottom:8}}>
-              <span style={{fontWeight:800,fontSize:14,color:"#0f172a"}}>⚡ Energy Investor Hub</span>
-              <button onClick={()=>setMenuOpen(false)} aria-label="Close menu" style={{background:"none",border:"none",fontSize:20,color:"#64748b",cursor:"pointer",padding:4}}>✕</button>
+              <span style={{fontWeight:800,fontSize:16,color:"#0f172a"}}>⚡ Energy Investor Hub</span>
+              <button onClick={()=>setMenuOpen(false)} aria-label="Close menu" style={{background:"none",border:"none",fontSize:22,color:"#64748b",cursor:"pointer",padding:4}}>✕</button>
             </div>
             {TABS.map(t=>(
-              <button key={t.id} onClick={()=>{setTab(t.id);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:tab===t.id?"#eff6ff":"none",border:"none",borderLeft:tab===t.id?"3px solid #0057a8":"3px solid transparent",padding:"12px 20px",fontSize:14,fontWeight:tab===t.id?700:500,color:tab===t.id?"#0057a8":"#374151",cursor:"pointer"}}>
+              <button key={t.id} onClick={()=>{setTab(t.id);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:tab===t.id?"#eff6ff":"none",border:"none",borderLeft:tab===t.id?"3px solid #0057a8":"3px solid transparent",padding:"12px 20px",fontSize:16,fontWeight:tab===t.id?700:500,color:tab===t.id?"#0057a8":"#374151",cursor:"pointer"}}>
                 {t.label}
               </button>
             ))}
@@ -909,11 +798,8 @@ export default function EnergyInvestorHub() {
           <style>{`@keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}`}</style>
         </div>
       )}
-      {/* Professional animated background — soft gradient blobs + subtle grid, no video needed */}
       <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:-1,overflow:"hidden",background:"#f8fafc"}}>
-        {/* Faint grid texture for a "data platform" feel */}
         <div style={{position:"absolute",inset:0,backgroundImage:"linear-gradient(rgba(15,23,42,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.035) 1px, transparent 1px)",backgroundSize:"48px 48px"}}></div>
-        {/* Slow-drifting soft color blobs in brand colors */}
         <div style={{position:"absolute",top:"-10%",left:"-10%",width:520,height:520,borderRadius:"50%",background:"radial-gradient(circle, rgba(0,87,168,0.10) 0%, rgba(0,87,168,0) 70%)",animation:"driftA 22s ease-in-out infinite"}}></div>
         <div style={{position:"absolute",top:"30%",right:"-12%",width:600,height:600,borderRadius:"50%",background:"radial-gradient(circle, rgba(124,58,237,0.09) 0%, rgba(124,58,237,0) 70%)",animation:"driftB 28s ease-in-out infinite"}}></div>
         <div style={{position:"absolute",bottom:"-15%",left:"20%",width:560,height:560,borderRadius:"50%",background:"radial-gradient(circle, rgba(10,102,64,0.08) 0%, rgba(10,102,64,0) 70%)",animation:"driftC 25s ease-in-out infinite"}}></div>
@@ -924,61 +810,67 @@ export default function EnergyInvestorHub() {
         `}</style>
       </div>
       {/* Top Bar */}
-      <div style={{background:"#0f172a",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:44}}>
+      <div style={{background:"#0f172a",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:48}}>
         <div style={{display:"flex",alignItems:"center",gap:16}}>
           <button onClick={()=>setMenuOpen(true)} aria-label="Open menu" style={{background:"none",border:"none",cursor:"pointer",padding:6,display:"flex",flexDirection:"column",gap:4,marginLeft:-6}}>
             <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
             <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
             <span style={{width:20,height:2,background:"#f1f5f9",borderRadius:2}}></span>
           </button>
-          <span style={{color:"#f1f5f9",fontSize:11,fontWeight:700,letterSpacing:1}}>ENERGY INVESTOR HUB</span>
-          <span style={{color:"#475569",fontSize:11}}>|</span>
-          <span style={{color:"#94a3b8",fontSize:11}}>Educational Platform · Not Financial Advice</span>
+          <span style={{color:"#f1f5f9",fontSize:13,fontWeight:700,letterSpacing:1}}>ENERGY INVESTOR HUB</span>
+          <span style={{color:"#475569",fontSize:13}}>|</span>
+          <span style={{color:"#94a3b8",fontSize:13}}>Educational Platform · Not Financial Advice</span>
         </div>
-        <span style={{color:"#64748b",fontSize:11}}>{new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}</span>
+        <span style={{color:"#64748b",fontSize:13}}>{new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}</span>
+      </div>
+
+      {/* Hero Banner — new photo, sits right under the top bar / hamburger subtitle */}
+      <div style={{width:"100%",height:280,backgroundImage:"url(/Screenshot_20260820_045031_YouTube.jpg)",backgroundSize:"cover",backgroundPosition:"center",position:"relative"}}>
+        <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom, rgba(15,23,42,0.10), rgba(15,23,42,0.55))"}}/>
+        <div style={{position:"relative",height:"100%",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",textAlign:"center",padding:"0 20px"}}>
+          <h1 style={{color:"#fff",fontSize:30,fontWeight:900,margin:0,letterSpacing:-0.5,textShadow:"0 2px 8px rgba(0,0,0,.35)"}}>Powering Tomorrow's Investments</h1>
+          <p style={{color:"#e2e8f0",fontSize:16,marginTop:10,maxWidth:560,textShadow:"0 1px 4px rgba(0,0,0,.35)"}}>AI-powered energy market intelligence, portfolio building, and investor insight</p>
+        </div>
       </div>
 
       {/* Header */}
       <div style={{position:"relative",background:"transparent",borderBottom:"1px solid rgba(226,232,240,0.4)",padding:"24px 28px 0",overflow:"hidden"}}>
-        {/* Soft glass overlay so header text stays legible over the animated background */}
         <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(255,255,255,0.25)",pointerEvents:"none"}}></div>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:24,background:"rgba(255,255,255,0.45)",backdropFilter:"blur(10px)",WebkitBackdropFilter:"blur(10px)",borderRadius:12,padding:"16px 20px",border:"1px solid rgba(255,255,255,0.5)"}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
               <div style={{width:42,height:42,background:"#0057a8",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>⚡</div>
               <div>
-                <h1 style={{margin:0,fontSize:24,fontWeight:800,color:"#0f172a",letterSpacing:-.5}}>Energy Investor Hub</h1>
+                <h1 style={{margin:0,fontSize:26,fontWeight:800,color:"#0f172a",letterSpacing:-.5}}>Energy Investor Hub</h1>
                 <div style={{marginTop:6,display:"flex",flexDirection:"column",gap:2}}>
-                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .1s forwards"}}>Global Energy Intelligence</span>
-                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .35s forwards"}}>Portfolio Builder · AI Tracker</span>
-                  <span style={{fontSize:12,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .6s forwards"}}>Weekly Briefing</span>
+                  <span style={{fontSize:14,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .1s forwards"}}>Global Energy Intelligence</span>
+                  <span style={{fontSize:14,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .35s forwards"}}>Portfolio Builder · AI Tracker</span>
+                  <span style={{fontSize:14,color:"#64748b",fontWeight:600,opacity:0,animation:"layerIn .5s ease-out .6s forwards"}}>Weekly Briefing</span>
                 </div>
                 <style>{`@keyframes layerIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
               </div>
             </div>
             <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:5}}>
-              <button onClick={handleRefresh} disabled={refreshing} style={{background:refreshing?"#e2e8f0":"#0057a8",color:refreshing?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"9px 18px",fontSize:13,fontWeight:600,cursor:refreshing?"default":"pointer",display:"flex",alignItems:"center",gap:7}}>
+              <button onClick={handleRefresh} disabled={refreshing} style={{background:refreshing?"#e2e8f0":"#0057a8",color:refreshing?"#94a3b8":"#fff",border:"none",borderRadius:6,padding:"9px 18px",fontSize:15,fontWeight:600,cursor:refreshing?"default":"pointer",display:"flex",alignItems:"center",gap:7}}>
                 {refreshing?<><LoadingDots/>Updating…</>:"↺ Refresh Intelligence"}
               </button>
-              <span style={{fontSize:11,color:"#94a3b8"}}>Updated: {lastUpdated.toLocaleTimeString()}</span>
+              <span style={{fontSize:13,color:"#94a3b8"}}>Updated: {lastUpdated.toLocaleTimeString()}</span>
             </div>
           </div>
 
-          {/* Stats Bar */}
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:1,background:"rgba(226,232,240,0.5)",border:"1px solid rgba(226,232,240,0.6)",borderRadius:8,overflow:"hidden",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}>
             {KEY_STATS.map((s,i)=>(
               <div key={s.label} style={{background:"rgba(255,255,255,0.55)",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)",padding:"14px 18px",borderRight:i<KEY_STATS.length-1?"1px solid rgba(226,232,240,0.6)":"none"}}>
-                <div style={{fontSize:10,color:"#94a3b8",fontWeight:600,letterSpacing:.5,textTransform:"uppercase",marginBottom:3}}>{s.label}</div>
-                <div style={{fontSize:22,fontWeight:800,color:s.accent,lineHeight:1.1}}>{s.value}</div>
-                <div style={{fontSize:11,color:"#64748b",marginTop:3}}>{s.sub}</div>
+                <div style={{fontSize:12,color:"#94a3b8",fontWeight:600,letterSpacing:.5,textTransform:"uppercase",marginBottom:3}}>{s.label}</div>
+                <div style={{fontSize:24,fontWeight:800,color:s.accent,lineHeight:1.1}}>{s.value}</div>
+                <div style={{fontSize:13,color:"#64748b",marginTop:3}}>{s.sub}</div>
               </div>
             ))}
           </div>
 
-          {/* Tabs */}
           <div style={{display:"flex",gap:0,marginTop:20,marginLeft:-4,overflowX:"auto"}}>
             {TABS.map(t=>(
-              <button key={t.id} onClick={()=>setTab(t.id)} style={{background:"none",border:"none",borderBottom:tab===t.id?"2px solid #0057a8":"2px solid transparent",color:tab===t.id?"#0057a8":"#64748b",padding:"10px 16px",fontSize:13,fontWeight:tab===t.id?700:500,cursor:"pointer",whiteSpace:"nowrap",transition:"all .15s"}}>
+              <button key={t.id} onClick={()=>setTab(t.id)} style={{background:"none",border:"none",borderBottom:tab===t.id?"2px solid #0057a8":"2px solid transparent",color:tab===t.id?"#0057a8":"#64748b",padding:"10px 16px",fontSize:15,fontWeight:tab===t.id?700:500,cursor:"pointer",whiteSpace:"nowrap",transition:"all .15s"}}>
                 {t.label}
               </button>
             ))}
@@ -986,15 +878,12 @@ export default function EnergyInvestorHub() {
         </div>
       </div>
 
-      {/* Content */}
       <div style={{maxWidth:1100,margin:"0 auto",padding:"28px"}}>
 
-        {/* DASHBOARD */}
         {tab==="dashboard"&&(
           <div style={{display:"flex",flexDirection:"column",gap:28}}>
-            {/* 3 New Feature Cards */}
             <div>
-              <div style={{fontSize:12,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>New Features — Click to Explore</div>
+              <div style={{fontSize:14,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>New Features — Click to Explore</div>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:14}}>
                 {[
                   {id:"portfolio",icon:"🏗",title:"Portfolio Builder",desc:"Build, simulate and get AI analysis on your personal energy investment portfolio.",color:"#0057a8",bg:"#dbeafe"},
@@ -1002,38 +891,35 @@ export default function EnergyInvestorHub() {
                   {id:"newsletter",icon:"📬",title:"Weekly Briefing",desc:"Subscribe to the Monday Energy Investor Briefing — curated by AI, every week.",color:"#0a6640",bg:"#d1fae5"},
                 ].map(f=>(
                   <button key={f.id} onClick={()=>setTab(f.id)} style={{background:"#fff",border:`1px solid ${f.bg}`,borderTop:`3px solid ${f.color}`,borderRadius:10,padding:"18px 20px",textAlign:"left",cursor:"pointer",boxShadow:"0 1px 3px rgba(0,0,0,.05)",transition:"box-shadow .2s"}}>
-                    <div style={{fontSize:24,marginBottom:8}}>{f.icon}</div>
-                    <div style={{fontWeight:700,fontSize:14,color:"#0f172a",marginBottom:5}}>{f.title}</div>
-                    <div style={{fontSize:12,color:"#64748b",lineHeight:1.55}}>{f.desc}</div>
-                    <div style={{marginTop:10,fontSize:12,color:f.color,fontWeight:700}}>Open →</div>
+                    <div style={{fontSize:26,marginBottom:8}}>{f.icon}</div>
+                    <div style={{fontWeight:700,fontSize:16,color:"#0f172a",marginBottom:5}}>{f.title}</div>
+                    <div style={{fontSize:14,color:"#64748b",lineHeight:1.55}}>{f.desc}</div>
+                    <div style={{marginTop:10,fontSize:14,color:f.color,fontWeight:700}}>Open →</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* AI Briefing */}
             <div style={{background:"#fff",border:"1px solid #bfdbfe",borderLeft:"4px solid #0057a8",borderRadius:8,padding:"22px 24px",boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
               <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
                 <Badge label="🤖 AI Daily Briefing" color="#1e40af" bg="#dbeafe" border="#93c5fd"/>
-                <span style={{fontSize:11,color:"#94a3b8",marginLeft:"auto"}}>Live Web Search · {new Date().toLocaleDateString()}</span>
+                <span style={{fontSize:13,color:"#94a3b8",marginLeft:"auto"}}>Live Web Search · {new Date().toLocaleDateString()}</span>
               </div>
-              {aiLoading?<div style={{color:"#1e40af",fontSize:14,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching web for today's energy intelligence…</div>
-              :<p style={{margin:0,fontSize:14,color:"#1e3a5f",lineHeight:1.75}}>{aiInsight||"Click 'Refresh Intelligence' to load today's AI briefing."}</p>}
+              {aiLoading?<div style={{color:"#1e40af",fontSize:16,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching web for today's energy intelligence…</div>
+              :<p style={{margin:0,fontSize:16,color:"#1e3a5f",lineHeight:1.75}}>{aiInsight||"Click 'Refresh Intelligence' to load today's AI briefing."}</p>}
             </div>
 
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24}}>
-              {/* Sources */}
               <div style={S.card}>
                 <h3 style={S.sectionTitle}>Tracked Data Sources</h3>
                 {SOURCES.map(s=>(
                   <a key={s.name} href={s.url} target="_blank" rel="noreferrer" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",padding:"8px 12px",borderRadius:6,border:"1px solid #f1f5f9",background:"#f8fafc",marginBottom:6}}>
                     <div style={{width:8,height:8,borderRadius:"50%",background:s.color,flexShrink:0}}/>
-                    <span style={{fontSize:13,fontWeight:600,color:"#374151",flex:1}}>{s.name}</span>
-                    <span style={{fontSize:11,color:"#94a3b8"}}>↗</span>
+                    <span style={{fontSize:15,fontWeight:600,color:"#374151",flex:1}}>{s.name}</span>
+                    <span style={{fontSize:13,color:"#94a3b8"}}>↗</span>
                   </a>
                 ))}
               </div>
-              {/* Sector Snapshot */}
               <div style={S.card}>
                 <h3 style={S.sectionTitle}>Sector Snapshot</h3>
                 {SECTORS.map(s=>{
@@ -1043,21 +929,20 @@ export default function EnergyInvestorHub() {
                   return(
                     <div key={s.name} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"7px 0",borderBottom:"1px solid #f1f5f9"}}>
                       <div style={{display:"flex",alignItems:"center",gap:7}}>
-                        <span style={{color:tc,fontSize:9,fontWeight:800}}>{ti}</span>
-                        <span style={{fontSize:13,color:"#374151",fontWeight:500}}>{s.name}</span>
+                        <span style={{color:tc,fontSize:11,fontWeight:800}}>{ti}</span>
+                        <span style={{fontSize:15,color:"#374151",fontWeight:500}}>{s.name}</span>
                       </div>
-                      <span style={{fontSize:12,fontWeight:700,color:rc}}>{s.rating}</span>
+                      <span style={{fontSize:14,fontWeight:700,color:rc}}>{s.rating}</span>
                     </div>
                   );
                 })}
-                <button onClick={()=>setTab("sectors")} style={{marginTop:12,background:"none",border:"none",color:"#0057a8",fontSize:12,fontWeight:600,cursor:"pointer",padding:0}}>Full analysis →</button>
+                <button onClick={()=>setTab("sectors")} style={{marginTop:12,background:"none",border:"none",color:"#0057a8",fontSize:14,fontWeight:600,cursor:"pointer",padding:0}}>Full analysis →</button>
               </div>
             </div>
-            {/* Latest Insights */}
             <div>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
                 <h3 style={{...S.sectionTitle,margin:0}}>Latest Expert Views</h3>
-                <button onClick={()=>setTab("insights")} style={{background:"none",border:"none",color:"#0057a8",fontSize:12,fontWeight:600,cursor:"pointer"}}>View all →</button>
+                <button onClick={()=>setTab("insights")} style={{background:"none",border:"none",color:"#0057a8",fontSize:14,fontWeight:600,cursor:"pointer"}}>View all →</button>
               </div>
               <div style={{display:"flex",flexDirection:"column",gap:12}}>
                 {SEED_INSIGHTS.slice(0,3).map(i=><InsightCard key={i.id} insight={i}/>)}
@@ -1066,39 +951,36 @@ export default function EnergyInvestorHub() {
           </div>
         )}
 
-        {/* 3 NEW FEATURES */}
         {tab==="portfolio"&&<PortfolioBuilder/>}
         {tab==="ai-energy"&&<AIEnergyTracker/>}
         {tab==="newsletter"&&<NewsletterHub/>}
-        {tab==="articles"&&<ArticlesHub/>}
 
-        {/* TRADING */}
         {tab==="trading"&&(
           <div style={{display:"flex",flexDirection:"column",gap:20}}>
             <div style={S.pageNote}><strong>Trading & Market Data</strong> — Educational overview of key energy stocks and ETFs. Prices are indicative only. Always verify on your broker's platform before trading.</div>
             <div style={{display:"flex",gap:8}}>
               {[["stocks","📈 Stocks"],["etfs","📦 ETFs"],["screener","🔎 How to Screen"]].map(([id,label])=>(
-                <button key={id} onClick={()=>setTradingTab(id)} style={{background:tradingTab===id?"#0057a8":"#fff",color:tradingTab===id?"#fff":"#374151",border:"1px solid",borderColor:tradingTab===id?"#0057a8":"#e2e8f0",borderRadius:6,padding:"8px 16px",fontSize:13,fontWeight:600,cursor:"pointer"}}>{label}</button>
+                <button key={id} onClick={()=>setTradingTab(id)} style={{background:tradingTab===id?"#0057a8":"#fff",color:tradingTab===id?"#fff":"#374151",border:"1px solid",borderColor:tradingTab===id?"#0057a8":"#e2e8f0",borderRadius:6,padding:"8px 16px",fontSize:15,fontWeight:600,cursor:"pointer"}}>{label}</button>
               ))}
             </div>
             {tradingTab==="stocks"&&(
               <div style={S.card}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
                   <h3 style={{...S.sectionTitle,margin:0}}>Top Energy Stocks · June 2026</h3>
-                  <span style={{fontSize:11,color:"#94a3b8"}}>Source: Morningstar, BlackRock</span>
+                  <span style={{fontSize:13,color:"#94a3b8"}}>Source: Morningstar, BlackRock</span>
                 </div>
                 {TOP_STOCKS.map(s=><StockRow key={s.ticker} s={s}/>)}
-                <div style={{marginTop:14,background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:6,padding:"10px 14px",fontSize:12,color:"#92400e"}}>⚠️ Prices are illustrative estimates for education only.</div>
+                <div style={{marginTop:14,background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:6,padding:"10px 14px",fontSize:14,color:"#92400e"}}>⚠️ Prices are illustrative estimates for education only.</div>
               </div>
             )}
             {tradingTab==="etfs"&&(
               <div style={{display:"flex",flexDirection:"column",gap:12}}>
                 <div style={{...S.card,marginBottom:0}}>
                   <h3 style={S.sectionTitle}>Key Energy ETFs · 2026 Performance</h3>
-                  <p style={{margin:"0 0 16px",fontSize:13,color:"#64748b"}}>ETFs let you invest in a basket of energy companies with one purchase — lower risk than individual stocks.</p>
+                  <p style={{margin:"0 0 16px",fontSize:15,color:"#64748b"}}>ETFs let you invest in a basket of energy companies with one purchase — lower risk than individual stocks.</p>
                 </div>
                 {ENERGY_ETFS.map(e=><ETFRow key={e.ticker} e={e}/>)}
-                <div style={{background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,padding:"14px 18px",fontSize:13,color:"#0c4a6e"}}>💡 <strong>Beginner tip:</strong> Consider starting with <strong>ICLN</strong> (global diversification) or <strong>GRID</strong> (grid infrastructure). Always check the latest TER on your broker before buying.</div>
+                <div style={{background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,padding:"14px 18px",fontSize:15,color:"#0c4a6e"}}>💡 <strong>Beginner tip:</strong> Consider starting with <strong>ICLN</strong> (global diversification) or <strong>GRID</strong> (grid infrastructure). Always check the latest TER on your broker before buying.</div>
               </div>
             )}
             {tradingTab==="screener"&&(
@@ -1113,31 +995,29 @@ export default function EnergyInvestorHub() {
                   {step:"06",title:"Set your position size",body:"No single stock should exceed 5-10% of your portfolio. Diversify across at least 3 energy sub-sectors."},
                 ].map(item=>(
                   <div key={item.step} style={{display:"grid",gridTemplateColumns:"40px 1fr",gap:16,marginBottom:16,paddingBottom:16,borderBottom:"1px solid #f1f5f9"}}>
-                    <div style={{width:36,height:36,background:"#dbeafe",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:800,color:"#1e40af",flexShrink:0}}>{item.step}</div>
+                    <div style={{width:38,height:38,background:"#dbeafe",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,fontWeight:800,color:"#1e40af",flexShrink:0}}>{item.step}</div>
                     <div>
-                      <div style={{fontWeight:700,fontSize:14,color:"#111827",marginBottom:4}}>{item.title}</div>
-                      <div style={{fontSize:13,color:"#6b7280",lineHeight:1.6}}>{item.body}</div>
+                      <div style={{fontWeight:700,fontSize:16,color:"#111827",marginBottom:4}}>{item.title}</div>
+                      <div style={{fontSize:15,color:"#6b7280",lineHeight:1.6}}>{item.body}</div>
                     </div>
                   </div>
                 ))}
-                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"12px 16px",fontSize:13,color:"#065f46"}}>🔗 <strong>Free screeners:</strong> finviz.com · finance.yahoo.com · morningstar.com · stockanalysis.com</div>
+                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"12px 16px",fontSize:15,color:"#065f46"}}>🔗 <strong>Free screeners:</strong> finviz.com · finance.yahoo.com · morningstar.com · stockanalysis.com</div>
               </div>
             )}
           </div>
         )}
 
-        {/* SECTORS */}
         {tab==="sectors"&&(
           <div>
             <div style={S.pageNote}>Sector ratings compiled from <strong>BlackRock, Morningstar, Wood Mackenzie, IEA</strong> and <strong>Deloitte</strong> reports as of June 2026. Educational purposes only.</div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {SECTORS.map(s=><SectorRow key={s.name} s={s}/>)}
             </div>
-            <div style={{marginTop:20,background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"12px 16px",fontSize:12,color:"#92400e"}}>⚠️ Always consult a licensed financial advisor before making investment decisions.</div>
+            <div style={{marginTop:20,background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"12px 16px",fontSize:14,color:"#92400e"}}>⚠️ Always consult a licensed financial advisor before making investment decisions.</div>
           </div>
         )}
 
-        {/* INSIGHTS */}
         {tab==="insights"&&(
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
             <div style={S.pageNote}>Curated from <strong>BlackRock, Morningstar, PwC, Wood Mackenzie, Deloitte, IEA</strong> and <strong>BloombergNEF</strong> · June 2026</div>
@@ -1145,52 +1025,48 @@ export default function EnergyInvestorHub() {
           </div>
         )}
 
-        {/* ASK AI */}
         {tab==="ask"&&(
           <div style={{display:"flex",flexDirection:"column",gap:20}}>
             <div style={{background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,padding:"16px 20px"}}>
-              <p style={{margin:0,fontSize:13,color:"#0c4a6e",lineHeight:1.6}}><strong>Ask anything about energy investing.</strong> AI analyst with live web search. Educational only — not financial advice.</p>
+              <p style={{margin:0,fontSize:15,color:"#0c4a6e",lineHeight:1.6}}><strong>Ask anything about energy investing.</strong> AI analyst with live web search. Educational only — not financial advice.</p>
             </div>
             <div>
-              <div style={{fontSize:12,color:"#94a3b8",marginBottom:10,fontWeight:700,textTransform:"uppercase",letterSpacing:.8}}>Quick Questions</div>
+              <div style={{fontSize:14,color:"#94a3b8",marginBottom:10,fontWeight:700,textTransform:"uppercase",letterSpacing:.8}}>Quick Questions</div>
               <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
                 {["Best energy ETFs right now?","How does AI affect energy demand?","Is nuclear a good investment in 2026?","Hydrogen risk assessment?","How to start investing in clean energy?","GE Vernova outlook 2026?"].map(q=>(
-                  <button key={q} onClick={()=>{setAiQuestion(q);fetchAiUpdate(q);}} style={{background:"#fff",border:"1px solid #cbd5e1",color:"#374151",padding:"8px 14px",borderRadius:20,fontSize:12,cursor:"pointer",fontWeight:500}}>{q}</button>
+                  <button key={q} onClick={()=>{setAiQuestion(q);fetchAiUpdate(q);}} style={{background:"#fff",border:"1px solid #cbd5e1",color:"#374151",padding:"8px 14px",borderRadius:20,fontSize:14,cursor:"pointer",fontWeight:500}}>{q}</button>
                 ))}
               </div>
             </div>
             <div style={{display:"flex",gap:10}}>
-              <input value={aiQuestion} onChange={e=>setAiQuestion(e.target.value)} onKeyDown={e=>e.key==="Enter"&&aiQuestion&&fetchAiUpdate(aiQuestion)} placeholder="Type your energy investment question…" style={{flex:1,background:"#fff",border:"1px solid #cbd5e1",borderRadius:8,padding:"12px 16px",color:"#111827",fontSize:14,outline:"none"}}/>
-              <button onClick={()=>aiQuestion&&fetchAiUpdate(aiQuestion)} disabled={aiLoading||!aiQuestion} style={{background:!aiQuestion?"#e2e8f0":"#0057a8",color:!aiQuestion?"#94a3b8":"#fff",border:"none",borderRadius:8,padding:"12px 22px",fontSize:13,fontWeight:700,cursor:aiLoading||!aiQuestion?"default":"pointer"}}>Ask</button>
+              <input value={aiQuestion} onChange={e=>setAiQuestion(e.target.value)} onKeyDown={e=>e.key==="Enter"&&aiQuestion&&fetchAiUpdate(aiQuestion)} placeholder="Type your energy investment question…" style={{flex:1,background:"#fff",border:"1px solid #cbd5e1",borderRadius:8,padding:"12px 16px",color:"#111827",fontSize:16,outline:"none"}}/>
+              <button onClick={()=>aiQuestion&&fetchAiUpdate(aiQuestion)} disabled={aiLoading||!aiQuestion} style={{background:!aiQuestion?"#e2e8f0":"#0057a8",color:!aiQuestion?"#94a3b8":"#fff",border:"none",borderRadius:8,padding:"12px 22px",fontSize:15,fontWeight:700,cursor:aiLoading||!aiQuestion?"default":"pointer"}}>Ask</button>
             </div>
             <div style={{background:"#fff",border:"1px solid #e2e8f0",borderLeft:"4px solid #0057a8",borderRadius:8,padding:"20px 24px",minHeight:90,boxShadow:"0 1px 3px rgba(0,0,0,.05)"}}>
-              <div style={{fontSize:11,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,marginBottom:10}}>AI Analyst Response</div>
-              {aiLoading?<div style={{color:"#1e40af",fontSize:14,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching live data…</div>
-              :aiInsight?<p style={{margin:0,fontSize:14,color:"#1e3a5f",lineHeight:1.75}}>{aiInsight}</p>
-              :<p style={{margin:0,fontSize:13,color:"#94a3b8",fontStyle:"italic"}}>Your answer will appear here.</p>}
+              <div style={{fontSize:13,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:.8,marginBottom:10}}>AI Analyst Response</div>
+              {aiLoading?<div style={{color:"#1e40af",fontSize:16,display:"flex",alignItems:"center",gap:10}}><LoadingDots/>Searching live data…</div>
+              :aiInsight?<p style={{margin:0,fontSize:16,color:"#1e3a5f",lineHeight:1.75}}>{aiInsight}</p>
+              :<p style={{margin:0,fontSize:15,color:"#94a3b8",fontStyle:"italic"}}>Your answer will appear here.</p>}
             </div>
-            <p style={{margin:0,fontSize:11,color:"#94a3b8"}}>⚠️ AI responses are for educational purposes only — not financial advice.</p>
+            <p style={{margin:0,fontSize:13,color:"#94a3b8"}}>⚠️ AI responses are for educational purposes only — not financial advice.</p>
           </div>
         )}
 
-        {/* BENEFITS */}
-        {/* GLOSSARY */}
         {tab==="glossary"&&(
           <div>
-            <input value={glossarySearch} onChange={e=>setGlossarySearch(e.target.value)} placeholder="Search terms and definitions…" style={{width:"100%",background:"#fff",border:"1px solid #cbd5e1",borderRadius:8,padding:"12px 16px",color:"#111827",fontSize:14,outline:"none",marginBottom:16,boxSizing:"border-box",boxShadow:"0 1px 2px rgba(0,0,0,.04)"}}/>
+            <input value={glossarySearch} onChange={e=>setGlossarySearch(e.target.value)} placeholder="Search terms and definitions…" style={{width:"100%",background:"#fff",border:"1px solid #cbd5e1",borderRadius:8,padding:"12px 16px",color:"#111827",fontSize:16,outline:"none",marginBottom:16,boxSizing:"border-box",boxShadow:"0 1px 2px rgba(0,0,0,.04)"}}/>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {filteredGlossary.map(g=>(
                 <div key={g.term} style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:8,padding:"16px 20px",boxShadow:"0 1px 3px rgba(0,0,0,.04)"}}>
-                  <div style={{fontWeight:700,color:"#0057a8",fontSize:14,marginBottom:6}}>{g.term}</div>
-                  <div style={{fontSize:13.5,color:"#374151",lineHeight:1.65}}>{g.def}</div>
+                  <div style={{fontWeight:700,color:"#0057a8",fontSize:16,marginBottom:6}}>{g.term}</div>
+                  <div style={{fontSize:15.5,color:"#374151",lineHeight:1.65}}>{g.def}</div>
                 </div>
               ))}
-              {filteredGlossary.length===0&&<div style={{color:"#94a3b8",fontSize:14,padding:"20px 0"}}>No matching terms found.</div>}
+              {filteredGlossary.length===0&&<div style={{color:"#94a3b8",fontSize:16,padding:"20px 0"}}>No matching terms found.</div>}
             </div>
           </div>
         )}
 
-        {/* ABOUT & TRUST */}
         {tab==="about"&&(
           <div style={{display:"flex",flexDirection:"column",gap:20}}>
             <div style={S.card}>
@@ -1198,8 +1074,8 @@ export default function EnergyInvestorHub() {
               <div style={{display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap"}}>
                 <div style={{width:56,height:56,borderRadius:"50%",background:"#0057a8",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,color:"#fff",fontWeight:800,flexShrink:0}}>⚡</div>
                 <div style={{flex:1,minWidth:220}}>
-                  <div style={{fontWeight:700,fontSize:15,color:"#111827",marginBottom:4}}>The Energy Investor Hub Team</div>
-                  <p style={{margin:0,fontSize:13.5,color:"#4b5563",lineHeight:1.7}}>
+                  <div style={{fontWeight:700,fontSize:17,color:"#111827",marginBottom:4}}>The Energy Investor Hub Team</div>
+                  <p style={{margin:0,fontSize:15.5,color:"#4b5563",lineHeight:1.7}}>
                     Energy Investor Hub is an independent educational project tracking the energy transition
                     and AI-driven power demand — built to make a fast-moving sector easier to follow for
                     everyday investors. Have a question, spotted an error, or want to get in touch?
@@ -1213,17 +1089,17 @@ export default function EnergyInvestorHub() {
               <h3 style={S.sectionTitle}>What This Site Is — and Isn't</h3>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
                 <div>
-                  <div style={{fontWeight:700,fontSize:13,color:"#065f46",marginBottom:8}}>✓ What we are</div>
+                  <div style={{fontWeight:700,fontSize:15,color:"#065f46",marginBottom:8}}>✓ What we are</div>
                   {["An educational resource on energy-sector investing","AI-curated summaries of public reports (IEA, BlackRock, Morningstar, etc.)","A free portfolio-simulation tool for learning purposes","A newsletter you can freely subscribe to or leave anytime"].map(t=>(
-                    <div key={t} style={{fontSize:12.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
+                    <div key={t} style={{fontSize:14.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
                       <span style={{position:"absolute",left:0,color:"#059669"}}>•</span>{t}
                     </div>
                   ))}
                 </div>
                 <div>
-                  <div style={{fontWeight:700,fontSize:13,color:"#991b1b",marginBottom:8}}>✕ What we are not</div>
+                  <div style={{fontWeight:700,fontSize:15,color:"#991b1b",marginBottom:8}}>✕ What we are not</div>
                   {["A broker, bank, or regulated investment firm","A custodian of your money — we never accept deposits","A source of personalized financial advice","Affiliated with any government regulator or agency"].map(t=>(
-                    <div key={t} style={{fontSize:12.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
+                    <div key={t} style={{fontSize:14.5,color:"#374151",lineHeight:1.6,marginBottom:6,paddingLeft:14,position:"relative"}}>
                       <span style={{position:"absolute",left:0,color:"#dc2626"}}>•</span>{t}
                     </div>
                   ))}
@@ -1233,7 +1109,7 @@ export default function EnergyInvestorHub() {
 
             <div style={S.card}>
               <h3 style={S.sectionTitle}>How We Make Money</h3>
-              <p style={{margin:0,fontSize:13.5,color:"#4b5563",lineHeight:1.7}}>
+              <p style={{margin:0,fontSize:15.5,color:"#4b5563",lineHeight:1.7}}>
                 This site is supported by display advertising (Google AdSense) and affiliate partnerships
                 with services like Seeking Alpha and eToro — if you sign up through a link on this site, we
                 may earn a commission at no extra cost to you. This never influences our editorial content
@@ -1241,7 +1117,7 @@ export default function EnergyInvestorHub() {
               </p>
             </div>
 
-            <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"14px 18px",fontSize:12.5,color:"#92400e",lineHeight:1.6}}>
+            <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:8,padding:"14px 18px",fontSize:14.5,color:"#92400e",lineHeight:1.6}}>
               ⚠️ <strong>Reminder:</strong> Nothing on this site is financial advice. Always do your own
               research and consult a licensed financial advisor before making investment decisions.
             </div>
@@ -1253,10 +1129,10 @@ export default function EnergyInvestorHub() {
       <div style={{background:"#0f172a",borderTop:"1px solid #1e293b",padding:"20px 28px",marginTop:40}}>
         <div style={{maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
           <div>
-            <div style={{color:"#f1f5f9",fontSize:13,fontWeight:700,marginBottom:4}}>Energy Investor Hub</div>
-            <div style={{color:"#475569",fontSize:11}}>Educational platform · Not financial advice · Always consult a licensed advisor</div>
+            <div style={{color:"#f1f5f9",fontSize:15,fontWeight:700,marginBottom:4}}>Energy Investor Hub</div>
+            <div style={{color:"#475569",fontSize:13}}>Educational platform · Not financial advice · Always consult a licensed advisor</div>
           </div>
-          <div style={{color:"#475569",fontSize:11,textAlign:"right"}}>
+          <div style={{color:"#475569",fontSize:13,textAlign:"right"}}>
             <div>Sources: IEA · BlackRock · Morningstar · Wood Mackenzie · Deloitte · PwC · BloombergNEF</div>
             <div style={{marginTop:4}}>© 2026 Energy Investor Hub</div>
           </div>
